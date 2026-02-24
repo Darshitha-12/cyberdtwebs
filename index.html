@@ -108,14 +108,6 @@
                 <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/rMQjvO2290k/hqdefault.jpg');"></div>
                 <div class="folder-content"><h3>App Install Fix</h3><p>Fix Android installation errors easily.</p><button class="view-btn" onclick="showPage('videos'); playMedia('youtube', 'rMQjvO2290k')">Watch</button></div>
             </div>
-            <div class="folder-card">
-                <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OgSA_lg0bjg/hqdefault.jpg');"></div>
-                <div class="folder-content"><h3>Recover Messages</h3><p>Simple tools for message recovery.</p><button class="view-btn" onclick="showPage('videos'); playMedia('youtube', 'OgSA_lg0bjg')">Watch</button></div>
-            </div>
-            <div class="folder-card">
-                <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/sVKnEvCmKiY/hqdefault.jpg');"></div>
-                <div class="folder-content"><h3>Status Saver</h3><p>Official status saving tricks.</p><button class="view-btn" onclick="showPage('videos'); playMedia('youtube', 'sVKnEvCmKiY')">Watch</button></div>
-            </div>
         </div>
     </div>
 
@@ -124,7 +116,6 @@
         <div class="video-wrapper">
             <iframe id="live-iframe" allowfullscreen allow="autoplay"></iframe>
         </div>
-        <p style="margin-top: 15px; color: #888;">Live stream eka penneththnam page eka refresh karanna.</p>
     </div>
 
     <div id="videos" class="page-section">
@@ -150,8 +141,12 @@
             <div class="section-title">AMILA DASSANAYAKE - CHEMISTRY</div>
             <div class="folder-grid">
                 <div class="folder-card">
+                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/Ds0CStgHS3Q/hqdefault.jpg');"></div>
+                    <div class="folder-content"><h3>Chemistry Lesson 01</h3><p>Introduction to Organic Chemistry.</p><button class="view-btn" onclick="playMedia('youtube', 'Ds0CStgHS3Q')">Watch</button></div>
+                </div>
+                <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/mwPtpBn4gSo/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Chemistry Lesson 01</h3><p>Organic Chemistry Live Discussion</p><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div>
+                    <div class="folder-content"><h3>Chemistry Lesson 02</h3><p>Live Discussion Session.</p><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div>
                 </div>
             </div>
             <button class="view-btn" style="width:120px; margin-top:20px;" onclick="closeAmila()">← BACK</button>
@@ -202,15 +197,13 @@
     <div id="about" class="page-section">
         <div class="hero">
             <h2>About CYBER DT</h2>
-            <p style="text-align: left; line-height: 1.8; color: #ccc;">Hi there! I’m your mentor. As a Cyber Security Expert, I realized that Sri Lankan A/L students need more than just textbooks...</p>
+            <p style="text-align: left; line-height: 1.8; color: #ccc;">Mentor & Cyber Security Expert Support.</p>
         </div>
     </div>
 
     <div id="contact" class="page-section">
         <div class="login-box" style="margin:auto; width:100%; max-width:400px;">
             <h2 style="color:var(--neon);">SUPPORT</h2>
-            <input type="text" id="contactName" placeholder="Your Name" class="contact-input" />
-            <textarea id="contactMsg" placeholder="Message..." class="contact-input" style="height:100px;"></textarea>
             <button class="view-btn" style="background:#25D366; color:white; border:none;" onclick="sendWA()">WhatsApp Us</button>
         </div>
     </div>
@@ -228,7 +221,6 @@
             document.getElementById('content-screen').style.display = 'block';
             document.getElementById('nav-tabs').style.display = 'flex';
             document.getElementById('watermark').style.display = 'block';
-            
             if(LIVE_VIDEO_ID !== "") {
                 document.getElementById('btn-live-section').style.display = 'inline-block';
                 document.getElementById('live-iframe').src = `https://www.youtube.com/embed/${LIVE_VIDEO_ID}?autoplay=1`;
@@ -242,15 +234,13 @@
         document.querySelectorAll('.nav-bar a').forEach(a => a.classList.remove('active'));
         document.getElementById(p).classList.add('active');
         document.getElementById('btn-' + p).classList.add('active');
-        closeDarshana();
-        closeAmila();
+        closeDarshana(); closeAmila();
     }
 
     function openDarshana() {
         document.getElementById('main-library-view').style.display = 'none';
         document.getElementById('darshana-view').style.display = 'block';
         document.getElementById('amila-view').style.display = 'none';
-        document.getElementById('player-view').style.display = 'none';
         currentMode = "darshana";
     }
 
@@ -264,7 +254,6 @@
         document.getElementById('main-library-view').style.display = 'none';
         document.getElementById('amila-view').style.display = 'block';
         document.getElementById('darshana-view').style.display = 'none';
-        document.getElementById('player-view').style.display = 'none';
         currentMode = "amila";
     }
 
@@ -290,16 +279,8 @@
         else closeDarshana();
     }
 
-    function goToBooks() {
-        showPage('videos');
-        openDarshana();
-        setTimeout(() => { document.querySelector('.resource-box').scrollIntoView({behavior:'smooth'}); }, 300);
-    }
-
-    function sendWA() {
-        const n = document.getElementById('contactName').value, m = document.getElementById('contactMsg').value;
-        if(n && m) window.open(`https://wa.me/947XXXXXXXX?text=Name:${n}%0AMessage:${m}`);
-    }
+    function goToBooks() { showPage('videos'); openDarshana(); }
+    function sendWA() { window.open(`https://wa.me/947XXXXXXXX`); }
 
     function startWatermark() {
         const wm = document.getElementById('watermark');
