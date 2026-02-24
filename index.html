@@ -137,13 +137,24 @@
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://echem.lk/images/gallery/class/gallery-2.jpg');"></div>
-                    <div class="folder-content"><h3>AMILA DASSANAYAKE</h3><p>Chemistry Lessons.</p><button class="view-btn" onclick="playMedia('youtube', 'Ds0CStgHS3Q')">Open</button></div>
+                    <div class="folder-content"><h3>AMILA DASSANAYAKE</h3><p>Chemistry Lessons.</p><button class="view-btn" onclick="openAmila()">Open Collection</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div>
                     <div class="folder-content"><h3>DARSHANA UKUWELA</h3><p>Physics Collection & Summary Books.</p><button class="view-btn" onclick="openDarshana()">Open Collection</button></div>
                 </div>
             </div>
+        </div>
+
+        <div id="amila-view" style="display:none">
+            <div class="section-title">AMILA DASSANAYAKE - CHEMISTRY</div>
+            <div class="folder-grid">
+                <div class="folder-card">
+                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/mwPtpBn4gSo/hqdefault.jpg');"></div>
+                    <div class="folder-content"><h3>Chemistry Lesson 01</h3><p>Organic Chemistry Live Discussion</p><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div>
+                </div>
+            </div>
+            <button class="view-btn" style="width:120px; margin-top:20px;" onclick="closeAmila()">← BACK</button>
         </div>
 
         <div id="darshana-view" style="display:none">
@@ -166,19 +177,17 @@
                     <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div>
                     <div class="folder-content"><h3>Physics Lesson 02</h3><p>ධාරා විද්ද්යුතය 02</p><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div>
                 </div>
-                  <div class="folder-card">
-                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div>
+                <div class="folder-card">
+                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/i-r4erXKQsM/hqdefault.jpg');"></div>
                     <div class="folder-content"><h3>Physics Lesson 03</h3><p>Work Power & Energy.</p><button class="view-btn" onclick="playMedia('youtube', 'i-r4erXKQsM')">Watch</button></div>
                 </div>
-                 <div class="folder-grid">
                 <div class="folder-card">
-                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Physics Lesson 04 PART I</h3><p>ධාරා විද්ද්යුතය 24.02.2026 </p><button class="view-btn" onclick="playMedia('youtube', 'QqAEsQ_jDIo')">Watch</button></div>
+                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div>
+                    <div class="folder-content"><h3>Physics Lesson 04 PART I</h3><p>ධාරා විද්ද්යුතය 24.02.2026</p><button class="view-btn" onclick="playMedia('youtube', 'QqAEsQ_jDIo')">Watch</button></div>
                 </div>
-                      <div class="folder-grid">
                 <div class="folder-card">
-                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Physics Lesson 04 PART II </h3><p>ධාරා විද්ද්යුතය 24.02.2026</p><button class="view-btn" onclick="playMedia('youtube', 'OvY3y_B_Rjw')">Watch</button></div>
+                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div>
+                    <div class="folder-content"><h3>Physics Lesson 04 PART II</h3><p>ධාරා විද්ද්යුතය 24.02.2026</p><button class="view-btn" onclick="playMedia('youtube', 'OvY3y_B_Rjw')">Watch</button></div>
                 </div>
             </div>
             <button class="view-btn" style="width:120px; margin-top:20px;" onclick="closeDarshana()">← BACK</button>
@@ -208,10 +217,8 @@
 </div>
 
 <script>
-    // --- CONFIGURATION ---
     const ACCESS_KEY = "CYBERDT2026";
-    const LIVE_VIDEO_ID = ""; // YouTube Live ID eka methanata danna
-    // ---------------------
+    const LIVE_VIDEO_ID = ""; 
 
     let currentMode = "main";
 
@@ -235,12 +242,14 @@
         document.querySelectorAll('.nav-bar a').forEach(a => a.classList.remove('active'));
         document.getElementById(p).classList.add('active');
         document.getElementById('btn-' + p).classList.add('active');
-        closeDarshana(); 
+        closeDarshana();
+        closeAmila();
     }
 
     function openDarshana() {
         document.getElementById('main-library-view').style.display = 'none';
         document.getElementById('darshana-view').style.display = 'block';
+        document.getElementById('amila-view').style.display = 'none';
         document.getElementById('player-view').style.display = 'none';
         currentMode = "darshana";
     }
@@ -248,20 +257,36 @@
     function closeDarshana() {
         document.getElementById('main-library-view').style.display = 'block';
         document.getElementById('darshana-view').style.display = 'none';
+        currentMode = "main";
+    }
+
+    function openAmila() {
+        document.getElementById('main-library-view').style.display = 'none';
+        document.getElementById('amila-view').style.display = 'block';
+        document.getElementById('darshana-view').style.display = 'none';
         document.getElementById('player-view').style.display = 'none';
+        currentMode = "amila";
+    }
+
+    function closeAmila() {
+        document.getElementById('main-library-view').style.display = 'block';
+        document.getElementById('amila-view').style.display = 'none';
         currentMode = "main";
     }
 
     function playMedia(type, id) {
         document.getElementById('main-library-view').style.display = 'none';
         document.getElementById('darshana-view').style.display = 'none';
+        document.getElementById('amila-view').style.display = 'none';
         document.getElementById('player-view').style.display = 'block';
         document.getElementById('main-iframe').src = type === 'youtube' ? `https://www.youtube.com/embed/${id}?autoplay=1` : `https://player.vimeo.com/video/${id}?autoplay=1`;
     }
 
     function backToFolder() {
         document.getElementById('main-iframe').src = "";
+        document.getElementById('player-view').style.display = 'none';
         if(currentMode === "darshana") openDarshana();
+        else if(currentMode === "amila") openAmila();
         else closeDarshana();
     }
 
