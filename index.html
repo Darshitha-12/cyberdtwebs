@@ -8,64 +8,49 @@
 
 <style>
     :root { --neon: #00f2ff; --bg: #030308; --card: #0a0a12; --live: #ff0000; --trans: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; user-select: none; overflow-x: hidden; }
-
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 10px; }
 
-    /* Navigation */
-    .nav-bar {
-        position: fixed; top: 0; width: 100%; background: rgba(10, 10, 18, 0.98);
-        display: none; justify-content: center; padding: 18px 0;
-        border-bottom: 1px solid var(--neon); z-index: 1000; backdrop-filter: blur(20px);
-    }
+    .nav-bar { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 18, 0.98); display: none; justify-content: center; padding: 18px 0; border-bottom: 1px solid var(--neon); z-index: 1000; backdrop-filter: blur(20px); }
     .nav-bar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; transition: 0.3s; letter-spacing: 1.5px; }
     .nav-bar a:hover, .nav-bar a.active { color: var(--neon); text-shadow: 0 0 15px var(--neon); }
     .nav-bar a.live-tab { color: var(--live); border: 1px solid var(--live); padding: 5px 10px; border-radius: 4px; display: none; animation: blink 1.2s infinite; }
     @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-    /* Login */
     #login-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 2000; }
-    .login-box { text-align: center; background: var(--card); padding: 50px 40px; border-radius: 20px; border: 2px solid var(--neon); width: 320px; }
+    .login-box { text-align: center; background: var(--card); padding: 50px 40px; border-radius: 20px; border: 2px solid var(--neon); width: 320px; box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
     input[type="password"], .contact-input, textarea { background: #111; border: 1px solid var(--neon); color: var(--neon); padding: 14px; border-radius: 8px; width: 100%; text-align: center; outline: none; margin-bottom: 20px; font-size: 1rem; }
 
-    /* Layout */
     #content-screen { display: none; padding-top: 100px; text-align: center; }
     .page-section { display: none; padding: 20px; max-width: 1200px; margin: 0 auto; animation: slideUp 0.6s ease; }
     .page-section.active { display: block; }
     @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
     .hero { padding: 40px 20px; background: linear-gradient(135deg, rgba(0, 242, 255, 0.1) 0%, transparent 100%); border-radius: 30px; margin-bottom: 40px; border: 1px solid rgba(0, 242, 255, 0.05); }
-    .hero h1 { font-size: 2.2rem; color: var(--neon); margin: 0; }
-    
+    .hero h1 { font-size: 2.2rem; color: var(--neon); margin: 0; text-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
     .section-title { font-size: 1.4rem; color: var(--neon); margin: 40px 0 20px; text-transform: uppercase; text-align: left; border-left: 5px solid var(--neon); padding-left: 15px; }
 
-    /* Grid & Cards */
     .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
     .folder-card { background: var(--card); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 20px; overflow: hidden; transition: 0.4s; text-align: left; }
-    .folder-card:hover { transform: translateY(-8px); border-color: var(--neon); }
-    .folder-thumb { width: 100%; height: 170px; background-size: cover; background-position: center; }
+    .folder-card:hover { transform: translateY(-8px); border-color: var(--neon); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    .folder-thumb { width: 100%; height: 170px; background-size: cover; background-position: center; border-bottom: 1px solid rgba(0, 242, 255, 0.05); }
     .folder-content { padding: 20px; }
     .folder-content h3 { margin: 0; font-size: 1.1rem; }
     .folder-content p { color: #777; font-size: 0.85rem; margin: 10px 0 15px; height: 35px; overflow: hidden; }
     
     .view-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
-    .view-btn:hover { background: var(--neon); color: black; }
+    .view-btn:hover { background: var(--neon); color: black; box-shadow: 0 0 15px var(--neon); }
 
-    /* Resources Section */
     .resource-box { background: rgba(0, 242, 255, 0.05); padding: 25px; border-radius: 20px; border: 1px dashed var(--neon); margin-bottom: 30px; text-align: left; }
     .pdf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 15px; }
     .pdf-link { display: flex; justify-content: space-between; background: #000; color: #fff; border: 1px solid #333; padding: 12px 15px; text-decoration: none; border-radius: 10px; font-size: 0.85rem; transition: 0.3s; }
     .pdf-link:hover { border-color: var(--neon); color: var(--neon); }
 
-    /* Player */
     .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; border: 1px solid var(--neon); border-radius: 15px; overflow: hidden; background: #000; }
     .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-
     #watermark { position: fixed; color: rgba(0, 242, 255, 0.05); font-size: 13px; z-index: 3000; pointer-events: none; display: none; }
 </style>
 </head>
@@ -98,24 +83,30 @@
         </div>
         <button class="view-btn" style="width:auto; padding: 15px 30px; margin-bottom: 30px;" onclick="goToBooks()">📚 GO TO SUMMARY BOOKS</button>
 
-        <div class="section-title">Tutorials & Updates</div>
+        <div class="section-title">Latest Tutorials</div>
         <div class="folder-grid">
             <div class="folder-card">
+                <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OgSA_lg0bjg/hqdefault.jpg');"></div>
+                <div class="folder-content"><h3>Recover Messages</h3><p>Official message recovery tools.</p><button class="view-btn" onclick="playMedia('youtube', 'OgSA_lg0bjg')">Watch</button></div>
+            </div>
+            <div class="folder-card">
+                <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/sVKnEvCmKiY/hqdefault.jpg');"></div>
+                <div class="folder-content"><h3>Status Saver</h3><p>Official status saving tricks.</p><button class="view-btn" onclick="playMedia('youtube', 'sVKnEvCmKiY')">Watch</button></div>
+            </div>
+            <div class="folder-card">
                 <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OEiwyITC5Kg/hqdefault.jpg');"></div>
-                <div class="folder-content"><h3>Time Management</h3><p>Manage your study hours for success.</p><button class="view-btn" onclick="showPage('videos'); playMedia('youtube', 'OEiwyITC5Kg')">Watch</button></div>
+                <div class="folder-content"><h3>Time Management</h3><p>Manage study hours for success.</p><button class="view-btn" onclick="playMedia('youtube', 'OEiwyITC5Kg')">Watch</button></div>
             </div>
             <div class="folder-card">
                 <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/rMQjvO2290k/hqdefault.jpg');"></div>
-                <div class="folder-content"><h3>App Install Fix</h3><p>Fix Android installation errors easily.</p><button class="view-btn" onclick="showPage('videos'); playMedia('youtube', 'rMQjvO2290k')">Watch</button></div>
+                <div class="folder-content"><h3>App Install Fix</h3><p>Fix Android installation errors.</p><button class="view-btn" onclick="playMedia('youtube', 'rMQjvO2290k')">Watch</button></div>
             </div>
         </div>
     </div>
 
     <div id="live-section" class="page-section">
         <div class="section-title" style="color: var(--live); border-color: var(--live);">🔴 LIVE STREAMING</div>
-        <div class="video-wrapper">
-            <iframe id="live-iframe" allowfullscreen allow="autoplay"></iframe>
-        </div>
+        <div class="video-wrapper"><iframe id="live-iframe" allowfullscreen allow="autoplay"></iframe></div>
     </div>
 
     <div id="videos" class="page-section">
@@ -124,15 +115,15 @@
             <div class="folder-grid">
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://media.themoviedb.org/t/p/w780/yfiJyg8QhlPXdhPFieKZqp1171v.jpg');"></div>
-                    <div class="folder-content"><h3>SOORYA (2025)</h3><p>Premium Movie Access.</p><button class="view-btn" onclick="playMedia('vimeo', '1159452386')">Play Movie</button></div>
+                    <div class="folder-content"><h3>SOORYA (2025)</h3><p>Premium Movie Access.</p><button class="view-btn" onclick="playMedia('vimeo', '1159452386')">Play</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://echem.lk/images/gallery/class/gallery-2.jpg');"></div>
-                    <div class="folder-content"><h3>AMILA DASSANAYAKE</h3><p>Chemistry Lessons.</p><button class="view-btn" onclick="openAmila()">Open Collection</button></div>
+                    <div class="folder-content"><h3>AMILA DASSANAYAKE</h3><p>Chemistry Lessons.</p><button class="view-btn" onclick="openAmila()">Open</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div>
-                    <div class="folder-content"><h3>DARSHANA UKUWELA</h3><p>Physics Collection & Summary Books.</p><button class="view-btn" onclick="openDarshana()">Open Collection</button></div>
+                    <div class="folder-content"><h3>DARSHANA UKUWELA</h3><p>Physics & Summary Books.</p><button class="view-btn" onclick="openDarshana()">Open</button></div>
                 </div>
             </div>
         </div>
@@ -140,14 +131,8 @@
         <div id="amila-view" style="display:none">
             <div class="section-title">AMILA DASSANAYAKE - CHEMISTRY</div>
             <div class="folder-grid">
-                <div class="folder-card">
-                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/Ds0CStgHS3Q/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Chemistry Lesson 01</h3><p>Introduction to Organic Chemistry.</p><button class="view-btn" onclick="playMedia('youtube', 'Ds0CStgHS3Q')">Watch</button></div>
-                </div>
-                <div class="folder-card">
-                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/mwPtpBn4gSo/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Chemistry Lesson 02</h3><p>Live Discussion Session.</p><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div>
-                </div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/mwPtpBn4gSo/hqdefault.jpg');"></div><div class="folder-content"><h3>Chemistry 01</h3><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/Ds0CStgHS3Q/hqdefault.jpg');"></div><div class="folder-content"><h3>Chemistry 02</h3><button class="view-btn" onclick="playMedia('youtube', 'Ds0CStgHS3Q')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px; margin-top:20px;" onclick="closeAmila()">← BACK</button>
         </div>
@@ -166,23 +151,23 @@
             <div class="folder-grid">
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>ධාරා විද්ද්යුතය 01</h3><p>Theory & Discussion.</p><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div>
+                    <div class="folder-content"><h3>ධාරා විද්‍යුතය 01</h3><p>Theory & Discussion</p><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Physics Lesson 02</h3><p>ධාරා විද්ද්යුතය 02</p><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div>
+                    <div class="folder-content"><h3>ධාරා විද්‍යුතය 02</h3><p>Theory & Discussion</p><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/i-r4erXKQsM/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Physics Lesson 03</h3><p>Work Power & Energy.</p><button class="view-btn" onclick="playMedia('youtube', 'i-r4erXKQsM')">Watch</button></div>
+                    <div class="folder-content"><h3>කාර්යය, ශක්තිය, බලය</h3><p>Full Theory</p><button class="view-btn" onclick="playMedia('youtube', 'i-r4erXKQsM')">Watch</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Physics Lesson 04 PART I</h3><p>ධාරා විද්ද්යුතය 24.02.2026</p><button class="view-btn" onclick="playMedia('youtube', 'QqAEsQ_jDIo')">Watch</button></div>
+                    <div class="folder-content"><h3>ධාරා විද්‍යුතය 24.02 PART I</h3><p>New Discussion</p><button class="view-btn" onclick="playMedia('youtube', 'QqAEsQ_jDIo')">Watch</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div>
-                    <div class="folder-content"><h3>Physics Lesson 04 PART II</h3><p>ධාරා විද්ද්යුතය 24.02.2026</p><button class="view-btn" onclick="playMedia('youtube', 'OvY3y_B_Rjw')">Watch</button></div>
+                    <div class="folder-content"><h3>ධාරා විද්‍යුතය 24.02 PART II</h3><p>New Discussion</p><button class="view-btn" onclick="playMedia('youtube', 'OvY3y_B_Rjw')">Watch</button></div>
                 </div>
             </div>
             <button class="view-btn" style="width:120px; margin-top:20px;" onclick="closeDarshana()">← BACK</button>
@@ -194,25 +179,13 @@
         </div>
     </div>
 
-    <div id="about" class="page-section">
-        <div class="hero">
-            <h2>About CYBER DT</h2>
-            <p style="text-align: left; line-height: 1.8; color: #ccc;">Mentor & Cyber Security Expert Support.</p>
-        </div>
-    </div>
-
-    <div id="contact" class="page-section">
-        <div class="login-box" style="margin:auto; width:100%; max-width:400px;">
-            <h2 style="color:var(--neon);">SUPPORT</h2>
-            <button class="view-btn" style="background:#25D366; color:white; border:none;" onclick="sendWA()">WhatsApp Us</button>
-        </div>
-    </div>
+    <div id="about" class="page-section"><div class="hero"><h2>About CYBER DT</h2><p>Cyber Security Expert & Mentor for Sri Lankan A/L students.</p></div></div>
+    <div id="contact" class="page-section"><div class="login-box" style="margin:auto; width:100%; max-width:400px;"><h2 style="color:var(--neon);">SUPPORT</h2><button class="view-btn" style="background:#25D366; color:white; border:none;" onclick="window.open('https://wa.me/947XXXXXXXX')">WhatsApp Support</button></div></div>
 </div>
 
 <script>
     const ACCESS_KEY = "CYBERDT2026";
     const LIVE_VIDEO_ID = ""; 
-
     let currentMode = "main";
 
     function checkPassword() {
@@ -221,52 +194,30 @@
             document.getElementById('content-screen').style.display = 'block';
             document.getElementById('nav-tabs').style.display = 'flex';
             document.getElementById('watermark').style.display = 'block';
-            if(LIVE_VIDEO_ID !== "") {
-                document.getElementById('btn-live-section').style.display = 'inline-block';
-                document.getElementById('live-iframe').src = `https://www.youtube.com/embed/${LIVE_VIDEO_ID}?autoplay=1`;
-            }
+            if(LIVE_VIDEO_ID !== "") { document.getElementById('btn-live-section').style.display = 'inline-block'; document.getElementById('live-iframe').src = `https://www.youtube.com/embed/${LIVE_VIDEO_ID}?autoplay=1`; }
             startWatermark();
         } else alert("WRONG KEY");
     }
 
     function showPage(p) {
+        document.getElementById('main-iframe').src = "";
         document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.nav-bar a').forEach(a => a.classList.remove('active'));
         document.getElementById(p).classList.add('active');
         document.getElementById('btn-' + p).classList.add('active');
-        closeDarshana(); closeAmila();
+        if(p !== 'videos') { document.getElementById('player-view').style.display = 'none'; document.getElementById('main-library-view').style.display = 'block'; document.getElementById('amila-view').style.display = 'none'; document.getElementById('darshana-view').style.display = 'none'; currentMode = "main"; }
     }
 
-    function openDarshana() {
-        document.getElementById('main-library-view').style.display = 'none';
-        document.getElementById('darshana-view').style.display = 'block';
-        document.getElementById('amila-view').style.display = 'none';
-        currentMode = "darshana";
-    }
-
-    function closeDarshana() {
-        document.getElementById('main-library-view').style.display = 'block';
-        document.getElementById('darshana-view').style.display = 'none';
-        currentMode = "main";
-    }
-
-    function openAmila() {
-        document.getElementById('main-library-view').style.display = 'none';
-        document.getElementById('amila-view').style.display = 'block';
-        document.getElementById('darshana-view').style.display = 'none';
-        currentMode = "amila";
-    }
-
-    function closeAmila() {
-        document.getElementById('main-library-view').style.display = 'block';
-        document.getElementById('amila-view').style.display = 'none';
-        currentMode = "main";
-    }
+    function openAmila() { document.getElementById('main-library-view').style.display = 'none'; document.getElementById('amila-view').style.display = 'block'; currentMode = "amila"; }
+    function closeAmila() { document.getElementById('main-library-view').style.display = 'block'; document.getElementById('amila-view').style.display = 'none'; currentMode = "main"; }
+    function openDarshana() { document.getElementById('main-library-view').style.display = 'none'; document.getElementById('darshana-view').style.display = 'block'; currentMode = "darshana"; }
+    function closeDarshana() { document.getElementById('main-library-view').style.display = 'block'; document.getElementById('darshana-view').style.display = 'none'; currentMode = "main"; }
 
     function playMedia(type, id) {
+        showPage('videos');
         document.getElementById('main-library-view').style.display = 'none';
-        document.getElementById('darshana-view').style.display = 'none';
         document.getElementById('amila-view').style.display = 'none';
+        document.getElementById('darshana-view').style.display = 'none';
         document.getElementById('player-view').style.display = 'block';
         document.getElementById('main-iframe').src = type === 'youtube' ? `https://www.youtube.com/embed/${id}?autoplay=1` : `https://player.vimeo.com/video/${id}?autoplay=1`;
     }
@@ -274,21 +225,12 @@
     function backToFolder() {
         document.getElementById('main-iframe').src = "";
         document.getElementById('player-view').style.display = 'none';
-        if(currentMode === "darshana") openDarshana();
-        else if(currentMode === "amila") openAmila();
-        else closeDarshana();
+        if(currentMode === "amila") openAmila(); else if(currentMode === "darshana") openDarshana(); else closeAmila();
     }
 
-    function goToBooks() { showPage('videos'); openDarshana(); }
-    function sendWA() { window.open(`https://wa.me/947XXXXXXXX`); }
+    function goToBooks() { showPage('videos'); openDarshana(); setTimeout(() => { document.querySelector('.resource-box').scrollIntoView({behavior:'smooth'}); }, 400); }
 
-    function startWatermark() {
-        const wm = document.getElementById('watermark');
-        setInterval(() => {
-            wm.style.left = Math.random() * (window.innerWidth - 150) + 'px';
-            wm.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-        }, 4000);
-    }
+    function startWatermark() { const wm = document.getElementById('watermark'); setInterval(() => { wm.style.left = Math.random() * (window.innerWidth - 150) + 'px'; wm.style.top = Math.random() * (window.innerHeight - 50) + 'px'; }, 4000); }
 </script>
 </body>
 </html>
