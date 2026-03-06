@@ -122,12 +122,21 @@
         <div id="amila-view" style="display:none">
             <div class="section-title">AMILA DASSANAYAKE - CHEMISTRY</div>
             <div class="folder-grid">
+                <div class="folder-card" style="border: 2px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1lkGGAtB3fU/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 ආවර්තීය විචලනය Full Lesson</h3><button class="view-btn" onclick="openPeriodicity()">Open Folder</button></div></div>
+                
                 <div class="folder-card" style="border: 1px solid #ff3300;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/jQO6kRVmW2Y/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 INORGANIC CHEMISTRY</h3><button class="view-btn" onclick="openInorganic()">Open Folder</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ffcc00;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 රසායනික ගණනය කිරීම්</h3><button class="view-btn" onclick="openAmilaCalculations()">Open Folder</button></div></div>
                 <div class="folder-card" style="border: 1px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 ව්‍යුහය හා බන්ධන</h3><button class="view-btn" onclick="openStructureBonding()">Open Folder</button></div></div>
-             
             </div>
             <button class="view-btn" style="width:120px;" onclick="resetLibrary()">← BACK</button>
+        </div>
+
+        <div id="periodicity-view" style="display:none">
+            <div class="section-title">ආවර්තීය විචලනය - ONE DAY SEMINAR</div>
+            <div class="folder-grid">
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1lkGGAtB3fU/hqdefault.jpg');"></div><div class="folder-content"><h3>Full Seminar Video</h3><button class="view-btn" onclick="playMedia('youtube', '1lkGGAtB3fU')">Watch Now</button></div></div>
+            </div>
+            <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
         </div>
 
         <div id="inorganic-view" style="display:none">
@@ -272,7 +281,7 @@
     }
 
     function hideAll() {
-        const ids = ['main-library-view', 'amila-view', 'inorganic-view', 'amila-calculations-view', 'bonding-view', 'darshana-view', 'dara-session-view', 'summary-books-view', 'theory-session-view', 'player-view'];
+        const ids = ['main-library-view', 'amila-view', 'periodicity-view', 'inorganic-view', 'amila-calculations-view', 'bonding-view', 'darshana-view', 'dara-session-view', 'summary-books-view', 'theory-session-view', 'player-view'];
         ids.forEach(id => {
             const el = document.getElementById(id);
             if(el) el.style.display = 'none';
@@ -281,6 +290,7 @@
 
     function resetLibrary() { hideAll(); document.getElementById('main-library-view').style.display = 'block'; currentMode = "main"; }
     function openAmila() { hideAll(); document.getElementById('amila-view').style.display = 'block'; currentMode = "amila"; }
+    function openPeriodicity() { hideAll(); document.getElementById('periodicity-view').style.display = 'block'; currentMode = "periodicity"; }
     function openInorganic() { hideAll(); document.getElementById('inorganic-view').style.display = 'block'; currentMode = "inorganic"; }
     function openAmilaCalculations() { hideAll(); document.getElementById('amila-calculations-view').style.display = 'block'; currentMode = "amila-calc"; }
     function openStructureBonding() { hideAll(); document.getElementById('bonding-view').style.display = 'block'; currentMode = "bonding"; }
@@ -303,7 +313,8 @@
 
     function backToFolder() {
         document.getElementById('main-iframe').src = "";
-        if(currentMode === "inorganic") openInorganic();
+        if(currentMode === "periodicity") openPeriodicity();
+        else if(currentMode === "inorganic") openInorganic();
         else if(currentMode === "summary-books") openSummaryBooks();
         else if(currentMode === "dara-session") openDaraSession();
         else if(currentMode === "theory-session") openTheorySession();
@@ -323,5 +334,4 @@
     }
 </script>
 </body>
-
 </html>
