@@ -124,6 +124,14 @@
             <div class="folder-grid">
                 <div class="folder-card" style="border: 1px solid #ffcc00;"><div class="folder-thumb" style="background-image: url('https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.lwlAQnTx5pdvfOVNwdm1CQHaE8%3Fpid%3DApi&sp=1772746703T5aac1f6c6dc6f6450a14c37c66c8320ebf48d40dfb30d0320073c6dbdf4e866d');"></div><div class="folder-content"><h3>📁 රසායනික ගණනය කිරීම්</h3><button class="view-btn" onclick="openAmilaCalculations()">Open Folder</button></div></div>
                 
+                <div class="folder-card" style="border: 1px solid var(--neon);">
+                    <div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div>
+                    <div class="folder-content">
+                        <h3>📁 ව්‍යුහය හා බන්ධන</h3>
+                        <button class="view-btn" onclick="openStructureBonding()">Open Folder</button>
+                    </div>
+                </div>
+
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/jQO6kRVmW2Y/hqdefault.jpg');"></div><div class="folder-content"><h3>INORGANIC ආරම්භය | Part I</h3><button class="view-btn" onclick="playMedia('youtube', 'jQO6kRVmW2Y')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/aOrlVhRzkG8/hqdefault.jpg');"></div><div class="folder-content"><h3>INORGANIC ආරම්භය | Part II</h3><button class="view-btn" onclick="playMedia('youtube', 'aOrlVhRzkG8')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/M-OEdrqomuc/hqdefault.jpg');"></div><div class="folder-content"><h3>2026 Inorganic Day 4</h3><button class="view-btn" onclick="playMedia('youtube', 'M-OEdrqomuc')">Watch</button></div></div>
@@ -133,40 +141,43 @@
             <button class="view-btn" style="width:120px;" onclick="resetLibrary()">← BACK</button>
         </div>
 
+        <div id="bonding-view" style="display:none">
+            <div class="section-title">ව්‍යුහය හා බන්ධන - SESSIONS</div>
+            <div class="folder-grid">
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - ලුවිස් ව්‍යුහ ඇඳීම</h3><button class="view-btn" onclick="playMedia('youtube', 'D6gyAfIJ1uA')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9WcBhOASpXM/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - සම්ප්‍රයුක්ත ව්‍යුහ</h3><button class="view-btn" onclick="playMedia('youtube', '9WcBhOASpXM')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/eBbF4Dg2KuI/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 03 - ලුවිස් ව්‍යුහ දත්ත</h3><button class="view-btn" onclick="playMedia('youtube', 'eBbF4Dg2KuI')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5wAPXqmBx8A/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - අවකාශ ව්‍යාප්තිය හා ධ්‍රැවීයතාවය</h3><button class="view-btn" onclick="playMedia('youtube', '5wAPXqmBx8A')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/g6BCwdR0B2w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - අණුවල ධ්‍රැවීයතාව</h3><button class="view-btn" onclick="playMedia('youtube', 'g6BCwdR0B2w')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/GXWUnY3q30w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා I</h3><button class="view-btn" onclick="playMedia('youtube', 'GXWUnY3q30w')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/W6LTBrXe1t0/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා II</h3><button class="view-btn" onclick="playMedia('youtube', 'W6LTBrXe1t0')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cXwx-z1k6hw/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - බන්ධන දිග හා තාපාංක</h3><button class="view-btn" onclick="playMedia('youtube', 'cXwx-z1k6hw')">Watch</button></div></div>
+            </div>
+            <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
+        </div>
+
         <div id="amila-calculations-view" style="display:none">
             <div class="section-title">රසායනික ගණනය කිරීම් - SESSIONS</div>
             <div class="folder-grid">
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය කිරීම් |මවුල ආශ්‍රිත සිද්ධාන්ත| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'lyHYcTfV_pI')">Watch</button></div></div>
-                
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/zLMOpG4609s/hqdefault.jpg');"></div><div class="folder-content"><h3> රසායනික ගණනය කිරීම්  Extra session | ස්ටොයිකියෝමිතිය ආශ්‍රිත සිද්ධාන්ත| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'zLMOpG4609s')">Watch</button></div></div>
-
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/7L0rUkC9IjY/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය කිරීම් | සාන්ද්‍රණ හා තනුකකරණ | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', '7L0rUkC9IjY')">Watch</button></div></div>
-                
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/VRE-D7cuITA/hqdefault.jpg');"></div><div class="folder-content"><h3> රසායනික ගණනය කිරීම් | ද්‍රාවණවල ප්‍රතිශත සංශුද්ධතා ආශ්‍රිත ගණනයන් | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', 'VRE-D7cuITA')">Watch</button></div></div>
-                
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/S3URdw1MZF4/hqdefault.jpg');"></div><div class="folder-content"><h3> 2026 Revision රසායනික ගණනය කිරීම් | Day 3</h3><button class="view-btn" onclick="playMedia('youtube', 'S3URdw1MZF4')">Watch</button></div></div>
-                
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5A1wLJgM4xQ/hqdefault.jpg');"></div><div class="folder-content"><h3> Past Papers | Week 01</h3><button class="view-btn" onclick="playMedia('youtube', '5A1wLJgM4xQ')">Watch</button></div></div>
-                
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/S3URdw1MZF4/hqdefault.jpg');"></div><div class="folder-content"><h3> රසායනික ගණනය DAY 03 |  අම්ල භෂ්ම අනුමාපන |</h3><button class="view-btn" onclick="playMedia('youtube', 'S3URdw1MZF4')">Watch</button></div></div>
-                
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/zLMOpG4609s/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය Extra session | ස්ටොයිකියෝමිතිය| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'zLMOpG4609s')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/7L0rUkC9IjY/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | සාන්ද්‍රණ හා තනුකකරණ | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', '7L0rUkC9IjY')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/VRE-D7cuITA/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | ප්‍රතිශත සංශුද්ධතා | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', 'VRE-D7cuITA')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/S3URdw1MZF4/hqdefault.jpg');"></div><div class="folder-content"><h3>2026 Revision රසායනික ගණනය කිරීම් | Day 3</h3><button class="view-btn" onclick="playMedia('youtube', 'S3URdw1MZF4')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5A1wLJgM4xQ/hqdefault.jpg');"></div><div class="folder-content"><h3>Past Papers | Week 01</h3><button class="view-btn" onclick="playMedia('youtube', '5A1wLJgM4xQ')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/Swwr_vNYU5s/hqdefault.jpg');"></div><div class="folder-content"><h3>REDOX One Day Seminar </h3><button class="view-btn" onclick="playMedia('youtube', 'Swwr_vNYU5s')">Watch</button></div></div>
-                
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cVOLxWiF6Rc/hqdefault.jpg');"></div><div class="folder-content"><h3>H2O2 ප්‍රතික්‍රිය තුලිත කිරිම</h3><button class="view-btn" onclick="playMedia('youtube', 'cVOLxWiF6Rc')">Watch</button></div></div>
-                
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cLy7V5teBwU/hqdefault.jpg');"></div><div class="folder-content"><h3> Redox Extra session Redox |  පාඩමේ වැඩිදුර ගැටලු සාකච්ඡාව</h3><button class="view-btn" onclick="playMedia('youtube', 'cLy7V5teBwU')">Watch</button></div></div>
-                
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9indLikG8gc/hqdefault.jpg');"></div><div class="folder-content"><h3> Redox වැඩිදුර කරුණු සාකච්ඡාව </h3><button class="view-btn" onclick="playMedia('youtube', '9indLikG8gc')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cLy7V5teBwU/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox Extra session | වැඩිදුර ගැටලු</h3><button class="view-btn" onclick="playMedia('youtube', 'cLy7V5teBwU')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9indLikG8gc/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox වැඩිදුර කරුණු සාකච්ඡාව </h3><button class="view-btn" onclick="playMedia('youtube', '9indLikG8gc')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
-
         </div>
 
         <div id="theory-session-view" style="display:none">
             <div class="section-title">Theory Sessions - 2026.02.04</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ශේත්‍ර  Part 04 I</h3><button class="view-btn" onclick="playWithAlert('QqAEsQ_jDIo')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ශේත්‍ර  Part 04 II </h3><button class="view-btn" onclick="playWithAlert('OvY3y_B_Rjw')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ශේත්‍ර Part 04 I</h3><button class="view-btn" onclick="playWithAlert('QqAEsQ_jDIo')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ශේත්‍ර Part 04 II </h3><button class="view-btn" onclick="playWithAlert('OvY3y_B_Rjw')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
@@ -190,7 +201,7 @@
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 01</h3><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 02</h3><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/0NiXrjA8gnA/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 03</h3><button class="view-btn" onclick="playMedia('youtube', '0NiXrjA8gnA')">Watch</button></div></div>
-                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lfkqvYR5r9w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 04</h3><button class="view-btn" onclick="playMedia('youtube', 'lfkqvYR5r9w')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lfkqvYR5r9w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 04</h3><button class="view-btn" onclick="playMedia('youtube', 'lfkqvYR5r9w')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
@@ -204,7 +215,7 @@
     <div id="contact" class="page-section">
         <div class="section-title">Contact Support</div>
         <div style="max-width: 400px; margin: auto;">
-            <a href="https://t.me/cyberdtadmincontactbot" target="_blank" class="contact-link">✈ Telegram Support Bot</a>
+            <a href="https://t.me/cyberdtwebloginbot" target="_blank" class="contact-link">✈ Telegram Support Bot</a>
             <a href="https://t.me/cyberdt1" target="_blank" class="contact-link">📢 Official Channel</a>
         </div>
     </div>
@@ -212,8 +223,7 @@
 
 <script>
     const ACCESS_KEYS = ["CYBERDT2026", "Mother1"];
-
-    const LIVE_ID = ""; 
+    const LIVE_ID = "0NiXrjA8gnA"; 
     let currentMode = "main";
 
     function checkPassword() {
@@ -253,7 +263,7 @@
     }
 
     function hideAll() {
-        const ids = ['main-library-view', 'amila-view', 'amila-calculations-view', 'darshana-view', 'dara-session-view', 'summary-books-view', 'theory-session-view', 'player-view'];
+        const ids = ['main-library-view', 'amila-view', 'amila-calculations-view', 'bonding-view', 'darshana-view', 'dara-session-view', 'summary-books-view', 'theory-session-view', 'player-view'];
         ids.forEach(id => {
             const el = document.getElementById(id);
             if(el) el.style.display = 'none';
@@ -263,6 +273,7 @@
     function resetLibrary() { hideAll(); document.getElementById('main-library-view').style.display = 'block'; currentMode = "main"; }
     function openAmila() { hideAll(); document.getElementById('amila-view').style.display = 'block'; currentMode = "amila"; }
     function openAmilaCalculations() { hideAll(); document.getElementById('amila-calculations-view').style.display = 'block'; currentMode = "amila-calc"; }
+    function openStructureBonding() { hideAll(); document.getElementById('bonding-view').style.display = 'block'; currentMode = "bonding"; }
     function openDarshana() { hideAll(); document.getElementById('darshana-view').style.display = 'block'; currentMode = "darshana"; }
     function openSummaryBooks() { hideAll(); document.getElementById('summary-books-view').style.display = 'block'; currentMode = "summary-books"; }
     function openDaraSession() { hideAll(); document.getElementById('dara-session-view').style.display = 'block'; currentMode = "dara-session"; }
@@ -288,6 +299,7 @@
         else if(currentMode === "darshana") openDarshana();
         else if(currentMode === "amila") openAmila();
         else if(currentMode === "amila-calc") openAmilaCalculations();
+        else if(currentMode === "bonding") openStructureBonding();
         else resetLibrary();
     }
 
@@ -300,6 +312,4 @@
     }
 </script>
 </body>
-
 </html>
-
