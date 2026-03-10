@@ -23,6 +23,64 @@
     .login-box { text-align: center; background: var(--card); padding: 50px 40px; border-radius: 20px; border: 2px solid var(--neon); width: 340px; box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
     input { background: #111; border: 1px solid var(--neon); color: var(--neon); padding: 14px; border-radius: 8px; width: 100%; text-align: center; outline: none; margin-bottom: 15px; font-size: 1rem; }
 
+    /* Welcome Screen Styles - Clean & User Friendly */
+    #welcome-screen { position: fixed; inset: 0; background: linear-gradient(135deg, #030308 0%, #0a0a15 50%, #030308 100%); display: none; align-items: center; justify-content: center; z-index: 2500; padding: 20px; overflow-y: auto; }
+    
+    .welcome-container { text-align: center; max-width: 450px; width: 100%; padding: 30px 20px; }
+    
+    .welcome-logo { 
+        width: 100px; height: 100px; margin: 0 auto 25px; 
+        border-radius: 50%; border: 3px solid var(--neon); 
+        display: flex; align-items: center; justify-content: center; 
+        font-size: 2.5rem; background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), transparent); 
+        animation: logoGlow 2s ease-in-out infinite;
+    }
+    @keyframes logoGlow { 
+        0%, 100% { box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); } 
+        50% { box-shadow: 0 0 40px rgba(0, 242, 255, 0.8), 0 0 60px rgba(0, 242, 255, 0.3); } 
+    }
+    
+    .welcome-title { font-size: 2rem; color: var(--neon); margin-bottom: 8px; text-shadow: 0 0 20px var(--neon); letter-spacing: 4px; font-weight: bold; }
+    .welcome-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
+    
+    .welcome-card {
+        background: rgba(10, 10, 18, 0.8);
+        border: 1px solid rgba(0, 242, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .welcome-card h3 { color: var(--neon); margin-bottom: 12px; font-size: 1.1rem; }
+    .welcome-card p { color: #aaa; line-height: 1.5; margin: 8px 0; font-size: 0.9rem; }
+    
+    .welcome-features { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+    .feature-tag { background: rgba(0, 242, 255, 0.1); border: 1px solid rgba(0, 242, 255, 0.3); padding: 6px 12px; border-radius: 15px; font-size: 0.75rem; color: var(--neon); }
+    
+    .subscribe-box { 
+        background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(200, 0, 0, 0.05)); 
+        border: 1px solid rgba(255, 0, 0, 0.3);
+        padding: 18px; border-radius: 12px; margin-bottom: 20px; 
+    }
+    .subscribe-box h3 { margin-bottom: 12px; font-size: 1rem; color: #fff; }
+    .subscribe-btn { 
+        display: inline-flex; align-items: center; gap: 8px; 
+        background: #ff0000; color: #fff; padding: 10px 20px; 
+        border-radius: 20px; text-decoration: none; font-weight: bold; 
+        transition: all 0.3s; font-size: 0.9rem;
+    }
+    .subscribe-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+    .subscribe-btn svg { width: 20px; height: 20px; }
+    
+    .continue-btn { 
+        background: linear-gradient(135deg, var(--neon), #00d4e0); 
+        color: #000; border: none; padding: 14px 35px; 
+        border-radius: 25px; font-size: 1rem; font-weight: bold; 
+        cursor: pointer; transition: all 0.3s; 
+    }
+    .continue-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--neon); }
+
     #content-screen { display: none; padding-top: 100px; text-align: center; }
     .page-section { display: none; padding: 20px; max-width: 1200px; margin: 0 auto; animation: slideUp 0.6s ease; }
     .page-section.active { display: block; }
@@ -65,6 +123,7 @@
         width: 100%;
         padding-bottom: 56.25%;
         background: #000;
+        overflow: hidden;
     }
     
     .video-container iframe,
@@ -77,14 +136,25 @@
         border: none;
     }
     
+    /* Video Transform Container for Zoom/Rotate */
+    .video-transform-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: center center;
+        will-change: transform;
+    }
+    
     /* Custom Controls Overlay */
     .custom-controls {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
-        padding: 20px 15px 15px;
+        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+        padding: 25px 15px 15px;
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: 10;
@@ -102,13 +172,11 @@
         background: rgba(255,255,255,0.2);
         border-radius: 3px;
         cursor: pointer;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
         position: relative;
     }
     
-    .progress-container:hover {
-        height: 8px;
-    }
+    .progress-container:hover { height: 8px; }
     
     .progress-bar {
         height: 100%;
@@ -124,8 +192,8 @@
         right: -6px;
         top: 50%;
         transform: translateY(-50%);
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
         background: var(--neon);
         border-radius: 50%;
         box-shadow: 0 0 10px var(--neon);
@@ -133,9 +201,7 @@
         transition: opacity 0.2s;
     }
     
-    .progress-container:hover .progress-bar::after {
-        opacity: 1;
-    }
+    .progress-container:hover .progress-bar::after { opacity: 1; }
     
     .buffered-bar {
         position: absolute;
@@ -154,26 +220,24 @@
         gap: 8px;
         font-size: 13px;
         color: #fff;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
     
-    .time-display .current-time {
-        color: var(--neon);
-        font-weight: bold;
-    }
+    .time-display .current-time { color: var(--neon); font-weight: bold; }
     
     /* Control Buttons Row */
     .controls-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
     }
     
-    .controls-left,
-    .controls-right {
+    .controls-left, .controls-right {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
     }
     
     .control-btn {
@@ -187,8 +251,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
     }
     
     .control-btn:hover {
@@ -196,15 +260,11 @@
         color: var(--neon);
     }
     
-    .control-btn svg {
-        width: 20px;
-        height: 20px;
-        fill: currentColor;
-    }
+    .control-btn svg { width: 22px; height: 22px; fill: currentColor; }
     
     .play-btn {
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         background: var(--neon);
         color: #000 !important;
     }
@@ -215,26 +275,22 @@
     }
     
     /* Volume Control */
-    .volume-control {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+    .volume-control { display: flex; align-items: center; gap: 5px; }
     
     .volume-slider {
-        width: 60px;
-        height: 4px;
+        width: 70px;
+        height: 5px;
         -webkit-appearance: none;
         appearance: none;
         background: rgba(255,255,255,0.3);
-        border-radius: 2px;
+        border-radius: 3px;
         outline: none;
     }
     
     .volume-slider::-webkit-slider-thumb {
         -webkit-appearance: none;
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
         background: var(--neon);
         border-radius: 50%;
         cursor: pointer;
@@ -265,23 +321,42 @@
         transform: translate(-50%, -50%) scale(1.1);
     }
     
-    .big-play-btn svg {
-        width: 35px;
-        height: 35px;
-        fill: #000;
-        margin-left: 4px;
-    }
-    
-    .big-play-btn.hidden {
-        display: none;
-    }
+    .big-play-btn svg { width: 35px; height: 35px; fill: #000; margin-left: 4px; }
+    .big-play-btn.hidden { display: none; }
     
     /* Speed Control */
-    .speed-btn {
-        font-size: 12px;
-        font-weight: bold;
-        min-width: 40px;
+    .speed-btn { font-size: 12px; font-weight: bold; min-width: 42px; }
+    
+    /* Quality Control */
+    .quality-btn { font-size: 11px; font-weight: bold; min-width: 48px; padding: 8px; }
+    .quality-dropdown { position: relative; }
+    .quality-menu {
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        border: 1px solid var(--neon);
+        border-radius: 8px;
+        padding: 8px 0;
+        display: none;
+        min-width: 110px;
+        z-index: 100;
     }
+    .quality-menu.show { display: block; }
+    .quality-option {
+        display: block;
+        width: 100%;
+        padding: 8px 15px;
+        background: none;
+        border: none;
+        color: #fff;
+        text-align: left;
+        cursor: pointer;
+        font-size: 12px;
+        transition: 0.2s;
+    }
+    .quality-option:hover { background: rgba(0, 242, 255, 0.2); color: var(--neon); }
+    .quality-option.active { color: var(--neon); }
     
     /* Fullscreen */
     .custom-player-wrapper.fullscreen {
@@ -299,11 +374,7 @@
         height: 100%;
     }
 
-    /* Hide YouTube UI elements - using crop technique */
-    .video-container {
-        overflow: hidden;
-    }
-    
+    /* Hide YouTube UI elements */
     .video-container iframe {
         position: absolute;
         top: -60px;
@@ -311,6 +382,101 @@
         width: 100%;
         height: calc(100% + 120px);
     }
+    
+    /* Toolbar Groups */
+    .toolbar-group {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+    }
+    
+    .toolbar-label { font-size: 10px; color: #888; text-transform: uppercase; margin-right: 4px; }
+    
+    .zoom-btn { width: 32px; height: 32px; font-size: 16px; font-weight: bold; }
+    .zoom-level { font-size: 11px; min-width: 35px; text-align: center; color: var(--neon); }
+    .rotate-btn { width: 32px; height: 32px; }
+    
+    /* Pinch zoom indicator */
+    .zoom-indicator {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        color: var(--neon);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: 15;
+        pointer-events: none;
+    }
+    
+    .zoom-indicator.visible { opacity: 1; }
+    
+    /* Quick Controls on Video Layer */
+    .quick-controls {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        gap: 20px;
+        z-index: 8;
+    }
+    
+    .quick-controls.visible { display: flex; }
+    
+    .quick-btn {
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid var(--neon);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .quick-btn:hover {
+        background: rgba(0, 242, 255, 0.3);
+        transform: scale(1.1);
+    }
+    
+    .quick-btn svg { width: 28px; height: 28px; fill: var(--neon); }
+    
+    /* Double tap areas for seek */
+    .seek-area-left, .seek-area-right {
+        position: absolute;
+        top: 0;
+        bottom: 60px;
+        width: 30%;
+        z-index: 6;
+    }
+    
+    .seek-area-left { left: 0; }
+    .seek-area-right { right: 0; }
+    
+    .seek-indicator {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        color: var(--neon);
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+    }
+    
+    .seek-indicator.show { opacity: 1; }
+    .seek-area-left .seek-indicator { left: 20px; }
+    .seek-area-right .seek-indicator { right: 20px; }
 </style>
 <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
@@ -327,6 +493,38 @@
         <div style="border-top: 1px solid #222; margin-bottom: 20px;"></div>
         <input type="password" id="passInput" placeholder="ENTER ACCESS KEY" />
         <button class="view-btn" onclick="checkPassword()">Unlock</button>
+    </div>
+</div>
+
+<!-- Welcome Screen - Clean & User Friendly -->
+<div id="welcome-screen">
+    <div class="welcome-container">
+        <div class="welcome-logo">🌐</div>
+        <h1 class="welcome-title">CYBER DT</h1>
+        <p class="welcome-subtitle">Premium Education Portal</p>
+        
+        <div class="welcome-card">
+            <h3>🎉 Welcome <span id="welcome-name">User</span>!</h3>
+            <p>You have successfully accessed the CYBER DT Premium Portal.</p>
+            <p>Enjoy unlimited access to all educational content and resources.</p>
+        </div>
+        
+        <div class="welcome-features">
+            <span class="feature-tag">📚 Tutorials</span>
+            <span class="feature-tag">🎬 Videos</span>
+            <span class="feature-tag">📄 Resources</span>
+            <span class="feature-tag">🔒 Secured</span>
+        </div>
+        
+        <div class="subscribe-box">
+            <h3>📺 Subscribe to Our YouTube Channel</h3>
+            <a href="https://www.youtube.com/@dtcybersl1" target="_blank" class="subscribe-btn">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.93 21.56,17.17C21.31,18.23 20.73,18.95 19.83,19.31C19.36,19.5 18.5,19.63 17.18,19.72C15.88,19.81 14.69,19.86 13.59,19.86L12,19.92C8.19,19.92 5.8,19.76 4.83,19.46C3.93,19.16 3.35,18.45 3.11,17.38C2.98,16.91 2.89,16.28 2.83,15.47C2.76,14.67 2.73,13.98 2.73,13.37L2.67,12.46C2.67,10.27 2.83,8.53 3.11,7.29C3.36,6.23 3.94,5.5 4.84,5.15C5.31,4.96 6.17,4.83 7.5,4.74C8.82,4.65 10,4.6 11.1,4.6L12.69,4.54C16.5,4.54 18.89,4.7 19.86,5C20.76,5.3 21.34,6 21.56,7.17Z"/></svg>
+                Subscribe Now
+            </a>
+        </div>
+        
+        <button class="continue-btn" onclick="enterPortal()">🚀 Enter Portal</button>
     </div>
 </div>
 
@@ -362,6 +560,7 @@
     <div id="videos" class="page-section">
         <div id="main-library-view">
             <div class="section-title">Collections</div>
+            
             <div class="folder-grid">
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://media.themoviedb.org/t/p/w780/yfiJyg8QhlPXdhPFieKZqp1171v.jpg');"></div><div class="folder-content"><h3>SOORYA (2025)</h3><button class="view-btn" onclick="playMedia('vimeo', '1159452386')">Play Movie</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>DARSHANA UKUWELA</h3><button class="view-btn" onclick="openDarshana()">Open Folder</button></div></div>
@@ -374,7 +573,7 @@
             <div class="folder-grid">
                 <div class="folder-card" style="border: 1px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>📚 SUMMARY BOOKS</h3><button class="view-btn" onclick="openSummaryBooks()">Open Books</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ffcc00;"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>Theory Session</h3><button class="view-btn" onclick="openTheorySession()">Open Folder</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය Session</h3><button class="view-btn" onclick="openDaraSession()">Open Folder</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>පරා විද්‍යාව Session</h3><button class="view-btn" onclick="openDaraSession()">Open Folder</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/i-r4erXKQsM/hqdefault.jpg');"></div><div class="folder-content"><h3>කාර්යය, ශක්තිය, බලය</h3><button class="view-btn" onclick="playMedia('youtube', 'i-r4erXKQsM')">Watch</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ff6600;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ASvTInTQ6us/hqdefault.jpg');"></div><div class="folder-content"><h3>Paper Discussion</h3><button class="view-btn" onclick="openPaperDiscussion()">Open Folder</button></div></div>
             </div>
@@ -398,6 +597,7 @@
                 <div class="folder-card" style="border: 1px solid #ff3300;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/jQO6kRVmW2Y/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 INORGANIC CHEMISTRY</h3><button class="view-btn" onclick="openInorganic()">Open Folder</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ffcc00;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 රසායනික ගණනය කිරීම්</h3><button class="view-btn" onclick="openAmilaCalculations()">Open Folder</button></div></div>
                 <div class="folder-card" style="border: 1px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 ව්‍යුහය හා බන්ධන</h3><button class="view-btn" onclick="openStructureBonding()">Open Folder</button></div></div>
+                <div class="folder-card" style="border: 1px solid #00ff88;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/B8uzyXU4C0k/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 shakthi vidhyawa</h3><button class="view-btn" onclick="playMedia('youtube', 'B8uzyXU4C0k')">Watch Now</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="resetLibrary()">← BACK</button>
         </div>
@@ -420,7 +620,7 @@
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/M-OEdrqomuc/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - 16 කාණ්ඩය (1)</h3><button class="view-btn" onclick="playMedia('youtube', 'M-OEdrqomuc')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/KGgfpQ3_NcY/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - 16 කාණ්ඩය (2)</h3><button class="view-btn" onclick="playMedia('youtube', 'KGgfpQ3_NcY')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/dzm6SVktNiA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - 17,18 කාණ්ඩ</h3><button class="view-btn" onclick="playMedia('youtube', 'Ds0CStgHS3Q')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/YZz1--NiGdk/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - කැටායන විශ්ලේෂණය</h3><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/YZz1--NiGdk/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - කාබනික විශ්ලේෂණය</h3><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/_EmyKquh7WY/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 08 - D ගොනුව SEMINAR</h3><button class="view-btn" onclick="playMedia('youtube', '_EmyKquh7WY')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ZmiXHH2Y6TY/hqdefault.jpg');"></div><div class="folder-content"><h3>13,14 Past Paper MCQ</h3><button class="view-btn" onclick="playMedia('youtube', 'ZmiXHH2Y6TY')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5l6WPBo12Zo/hqdefault.jpg');"></div><div class="folder-content"><h3>15 Past Paper MCQ 1</h3><button class="view-btn" onclick="playMedia('youtube', '5l6WPBo12Zo')">Watch</button></div></div>
@@ -434,10 +634,10 @@
             <div class="section-title">ව්‍යුහය හා බන්ධන - SESSIONS</div>
             <div class="folder-grid">
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - ලුවිස් ව්‍යුහ ඇඳීම</h3><button class="view-btn" onclick="playMedia('youtube', 'D6gyAfIJ1uA')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9WcBhOASpXM/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - සම්ප්‍රයුක්ත ව්‍යුහ</h3><button class="view-btn" onclick="playMedia('youtube', '9WcBhOASpXM')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9WcBhOASpXM/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - සම්පූර්ණ ව්‍යුහ</h3><button class="view-btn" onclick="playMedia('youtube', '9WcBhOASpXM')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/eBbF4Dg2KuI/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 03 - ලුවිස් ව්‍යුහ දත්ත</h3><button class="view-btn" onclick="playMedia('youtube', 'eBbF4Dg2KuI')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5wAPXqmBx8A/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - අවකාශ ව්‍යාප්තිය හා ධ්‍රැවීයතාවය</h3><button class="view-btn" onclick="playMedia('youtube', '5wAPXqmBx8A')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/g6BCwdR0B2w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - අණුවල ධ්‍රැවීයතාව</h3><button class="view-btn" onclick="playMedia('youtube', 'g6BCwdR0B2w')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5wAPXqmBx8A/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - අවකාශ ව්‍යාප්තිය හා අණුක භ්‍රමණයාවය</h3><button class="view-btn" onclick="playMedia('youtube', '5wAPXqmBx8A')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/g6BCwdR0B2w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - අණුවල අණුක භ්‍රමණයාව</h3><button class="view-btn" onclick="playMedia('youtube', 'g6BCwdR0B2w')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/GXWUnY3q30w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා I</h3><button class="view-btn" onclick="playMedia('youtube', 'GXWUnY3q30w')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/W6LTBrXe1t0/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා II</h3><button class="view-btn" onclick="playMedia('youtube', 'W6LTBrXe1t0')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cXwx-z1k6hw/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - බන්ධන දිග හා තාපාංක</h3><button class="view-btn" onclick="playMedia('youtube', 'cXwx-z1k6hw')">Watch</button></div></div>
@@ -448,15 +648,15 @@
         <div id="amila-calculations-view" style="display:none">
             <div class="section-title">රසායනික ගණනය කිරීම් - SESSIONS</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය කිරීම් |මවුල ආශ්‍රිත සිද්ධාන්ත| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'lyHYcTfV_pI')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය කිරීම් |මූලික සංකල්ප| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'lyHYcTfV_pI')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/zLMOpG4609s/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය Extra session | ස්ටොයිකියෝමිතිය| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'zLMOpG4609s')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/7L0rUkC9IjY/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | සාන්ද්‍රණ හා තනුකකරණ | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', '7L0rUkC9IjY')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/VRE-D7cuITA/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | ප්‍රතිශත සංශුද්ධතා | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', 'VRE-D7cuITA')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/7L0rUkC9IjY/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | සාන්ද්‍රණ හා තනුකකරණය | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', '7L0rUkC9IjY')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/VRE-D7cuITA/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | ප්‍රතිශත සංයුතිය | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', 'VRE-D7cuITA')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/S3URdw1MZF4/hqdefault.jpg');"></div><div class="folder-content"><h3>2026 Revision රසායනික ගණනය කිරීම් | Day 3</h3><button class="view-btn" onclick="playMedia('youtube', 'S3URdw1MZF4')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5A1wLJgM4xQ/hqdefault.jpg');"></div><div class="folder-content"><h3>Past Papers | Week 01</h3><button class="view-btn" onclick="playMedia('youtube', '5A1wLJgM4xQ')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/Swwr_vNYU5s/hqdefault.jpg');"></div><div class="folder-content"><h3>REDOX One Day Seminar </h3><button class="view-btn" onclick="playMedia('youtube', 'Swwr_vNYU5s')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cVOLxWiF6Rc/hqdefault.jpg');"></div><div class="folder-content"><h3>H2O2 ප්‍රතික්‍රිය තුලිත කිරිම</h3><button class="view-btn" onclick="playMedia('youtube', 'cVOLxWiF6Rc')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cLy7V5teBwU/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox Extra session | වැඩිදුර ගැටලු</h3><button class="view-btn" onclick="playMedia('youtube', 'cLy7V5teBwU')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cVOLxWiF6Rc/hqdefault.jpg');"></div><div class="folder-content"><h3>H2O2 ප්‍රතික්‍රියා තුලින් කිරීම</h3><button class="view-btn" onclick="playMedia('youtube', 'cVOLxWiF6Rc')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cLy7V5teBwU/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox Extra session | වැඩිදුර ගැටළු</h3><button class="view-btn" onclick="playMedia('youtube', 'cLy7V5teBwU')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9indLikG8gc/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox වැඩිදුර කරුණු සාකච්ඡාව </h3><button class="view-btn" onclick="playMedia('youtube', '9indLikG8gc')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
@@ -465,8 +665,8 @@
         <div id="theory-session-view" style="display:none">
             <div class="section-title">Theory Sessions - 2026.02.04</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ශේත්‍ර Part 04 I</h3><button class="view-btn" onclick="playWithAlert('QqAEsQ_jDIo')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ශේත්‍ර Part 04 II </h3><button class="view-btn" onclick="playWithAlert('OvY3y_B_Rjw')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ෂේත්‍ර Part 04 I</h3><button class="view-btn" onclick="playWithAlert('QqAEsQ_jDIo')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ෂේත්‍ර Part 04 II </h3><button class="view-btn" onclick="playWithAlert('OvY3y_B_Rjw')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
@@ -485,23 +685,48 @@
         </div>
 
         <div id="dara-session-view" style="display:none">
-            <div class="section-title">ධාරා විද්‍යුතය - FULL SESSIONS</div>
+            <div class="section-title">පරා විද්‍යුත්වය - FULL SESSIONS</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 01</h3><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 02</h3><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/0NiXrjA8gnA/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 03</h3><button class="view-btn" onclick="playMedia('youtube', '0NiXrjA8gnA')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lfkqvYR5r9w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුතය DAY 04</h3><button class="view-btn" onclick="playMedia('youtube', 'lfkqvYR5r9w')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div><div class="folder-content"><h3>පරා විද්‍යුත්වය DAY 01</h3><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div><div class="folder-content"><h3>පරා විද්‍යුත්වය DAY 02</h3><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/0NiXrjA8gnA/hqdefault.jpg');"></div><div class="folder-content"><h3>පරා විද්‍යුත්වය DAY 03</h3><button class="view-btn" onclick="playMedia('youtube', '0NiXrjA8gnA')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lfkqvYR5r9w/hqdefault.jpg');"></div><div class="folder-content"><h3>පරා විද්‍යුත්වය DAY 04</h3><button class="view-btn" onclick="playMedia('youtube', 'lfkqvYR5r9w')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
 
         <div id="player-view" style="display:none">
             <div class="custom-player-wrapper" id="player-wrapper">
-                <div class="video-container" id="video-container"></div>
+                <div class="zoom-indicator" id="zoom-indicator">1x | 0°</div>
+                
+                <!-- Seek Areas for Double Tap -->
+                <div class="seek-area-left" id="seek-left">
+                    <div class="seek-indicator" id="seek-left-indicator">⏪ 10s</div>
+                </div>
+                <div class="seek-area-right" id="seek-right">
+                    <div class="seek-indicator" id="seek-right-indicator">10s ⏩</div>
+                </div>
+                
+                <!-- Quick Controls on Video Layer -->
+                <div class="quick-controls" id="quick-controls">
+                    <button class="quick-btn" id="quick-volume-down" title="Volume Down">
+                        <svg viewBox="0 0 24 24"><path d="M5 9v6h4l5 5V4L9 9H5z"/></svg>
+                    </button>
+                    <button class="quick-btn" id="quick-play" title="Play/Pause">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button class="quick-btn" id="quick-volume-up" title="Volume Up">
+                        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                    </button>
+                </div>
+                
+                <div class="video-container" id="video-container">
+                    <div class="video-transform-wrapper" id="video-transform-wrapper"></div>
+                </div>
                 <button class="big-play-btn" id="big-play-btn">
                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </button>
-                <div class="custom-controls">
+                <div class="custom-controls" id="custom-controls">
                     <div class="progress-container" id="progress-container">
                         <div class="buffered-bar" id="buffered-bar"></div>
                         <div class="progress-bar" id="progress-bar"></div>
@@ -519,6 +744,28 @@
                             </div>
                         </div>
                         <div class="controls-right">
+                            <!-- Zoom Controls -->
+                            <div class="toolbar-group">
+                                <span class="toolbar-label">Zoom</span>
+                                <button class="control-btn zoom-btn" id="zoom-out-btn" title="Zoom Out">−</button>
+                                <span class="zoom-level" id="zoom-level">1x</span>
+                                <button class="control-btn zoom-btn" id="zoom-in-btn" title="Zoom In">+</button>
+                            </div>
+                            
+                            <!-- Rotate Controls -->
+                            <div class="toolbar-group">
+                                <span class="toolbar-label">Rotate</span>
+                                <button class="control-btn rotate-btn" id="rotate-left-btn" title="Rotate Left">
+                                    <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+                                </button>
+                                <button class="control-btn rotate-btn" id="rotate-right-btn" title="Rotate Right">
+                                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.01l.01.01L11.5 10l4-4v3h5v2h-5v3zm-3-6c-3.54 0-6.55 2.31-7.6 5.5l2.37.78C8.32 12.31 10.96 11 14 11c.68 0 1.35.08 2 .23V10.1c-.65-.07-1.32-.1-2-.1-3.54 0-6.55 2.31-7.6 5.5l2.37.78C7.82 14.81 9.96 14 12.5 14z"/></svg>
+                                </button>
+                                <button class="control-btn rotate-btn" id="reset-transform-btn" title="Reset">
+                                    <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                                </button>
+                            </div>
+                            
                             <div class="volume-control">
                                 <button class="control-btn" id="volume-btn">
                                     <svg id="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -527,6 +774,19 @@
                                 <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
                             </div>
                             <button class="control-btn speed-btn" id="speed-btn">1x</button>
+                            
+                            <!-- Quality Button -->
+                            <div class="quality-dropdown">
+                                <button class="control-btn quality-btn" id="quality-btn" title="Video Quality">HD</button>
+                                <div class="quality-menu" id="quality-menu">
+                                    <button class="quality-option" data-quality="hd1080" onclick="setQuality('hd1080')">1080p HD</button>
+                                    <button class="quality-option" data-quality="hd720" onclick="setQuality('hd720')">720p HD</button>
+                                    <button class="quality-option active" data-quality="large" onclick="setQuality('large')">480p</button>
+                                    <button class="quality-option" data-quality="medium" onclick="setQuality('medium')">360p</button>
+                                    <button class="quality-option" data-quality="small" onclick="setQuality('small')">240p</button>
+                                </div>
+                            </div>
+                            
                             <button class="control-btn" id="fullscreen-btn">
                                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
                             </button>
@@ -560,6 +820,24 @@
     let playbackSpeed = 1;
     let playerWrapper = null;
     let hideControlsTimeout = null;
+    let currentQuality = 'large';
+    let userName = '';
+    
+    // Zoom and Rotate state
+    let currentZoom = 1;
+    let currentRotation = 0;
+    let minZoom = 0.5;
+    let maxZoom = 3;
+    let zoomStep = 0.25;
+    let autoRotateEnabled = true;
+    
+    // Touch/pinch zoom state
+    let initialPinchDistance = 0;
+    let initialPinchZoom = 1;
+    
+    // Double tap state
+    let lastTapTime = 0;
+    let tapTimeout = null;
 
     // Load YouTube IFrame API
     let ytApiLoaded = false;
@@ -581,15 +859,26 @@
 
     function checkPassword() {
         const userInput = document.getElementById('passInput').value;
+        userName = document.getElementById('regName').value || 'User';
         if (ACCESS_KEYS.includes(userInput)) {
             document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('content-screen').style.display = 'block';
-            document.getElementById('nav-tabs').style.display = 'flex';
-            document.getElementById('watermark').style.display = 'block';
-            startWatermark();
-            updateLive();
+            showWelcomeScreen();
             loadYouTubeAPI();
         } else { alert("Invalid Key!"); }
+    }
+    
+    function showWelcomeScreen() {
+        document.getElementById('welcome-name').textContent = userName;
+        document.getElementById('welcome-screen').style.display = 'flex';
+    }
+    
+    function enterPortal() {
+        document.getElementById('welcome-screen').style.display = 'none';
+        document.getElementById('content-screen').style.display = 'block';
+        document.getElementById('nav-tabs').style.display = 'flex';
+        document.getElementById('watermark').style.display = 'block';
+        startWatermark();
+        updateLive();
     }
 
     function requestKey() {
@@ -646,11 +935,19 @@
         if (player) {
             if (currentVideoType === 'youtube' && player.destroy) {
                 player.destroy();
+            } else if (currentVideoType === 'local' && player.pause) {
+                player.pause();
             }
             player = null;
         }
+        const transformWrapper = document.getElementById('video-transform-wrapper');
+        if (transformWrapper) transformWrapper.innerHTML = '';
         const container = document.getElementById('video-container');
-        if (container) container.innerHTML = '';
+        if (container) {
+            const iframe = container.querySelector('iframe');
+            if (iframe) iframe.remove();
+        }
+        resetTransform();
     }
 
     function playMedia(type, id) {
@@ -671,24 +968,151 @@
         document.getElementById('duration').textContent = '0:00';
         document.getElementById('progress-bar').style.width = '0%';
         
+        // Show custom controls
+        document.getElementById('custom-controls').style.display = 'block';
+        
         if (type === 'youtube') {
             initYouTubePlayer(id);
         } else if (type === 'vimeo') {
             initVimeoPlayer(id);
+        } else if (type === 'local') {
+            initLocalPlayer(id);
         }
         
         setupControlListeners();
+        setupTransformControls();
+        setupQuickControls();
+        setupSeekAreas();
+    }
+    
+    // Setup Quick Controls on Video Layer
+    function setupQuickControls() {
+        const quickControls = document.getElementById('quick-controls');
+        
+        // Show quick controls on tap
+        const container = document.getElementById('video-container');
+        container.addEventListener('click', (e) => {
+            if (e.target.closest('.quick-controls') || e.target.closest('.custom-controls')) return;
+            
+            const now = Date.now();
+            const timeDiff = now - lastTapTime;
+            
+            if (timeDiff < 300) {
+                // Double tap detected
+                clearTimeout(tapTimeout);
+                handleDoubleTap(e);
+                lastTapTime = 0;
+            } else {
+                // Single tap - show/hide quick controls
+                lastTapTime = now;
+                tapTimeout = setTimeout(() => {
+                    quickControls.classList.toggle('visible');
+                    setTimeout(() => {
+                        if (quickControls.classList.contains('visible')) {
+                            quickControls.classList.remove('visible');
+                        }
+                    }, 3000);
+                }, 300);
+            }
+        });
+        
+        // Quick control buttons
+        document.getElementById('quick-volume-down').onclick = () => {
+            currentVolume = Math.max(0, currentVolume - 10);
+            changeVolumeDirect(currentVolume);
+        };
+        
+        document.getElementById('quick-volume-up').onclick = () => {
+            currentVolume = Math.min(100, currentVolume + 10);
+            changeVolumeDirect(currentVolume);
+        };
+        
+        document.getElementById('quick-play').onclick = togglePlayPause;
+    }
+    
+    function handleDoubleTap(e) {
+        const container = document.getElementById('video-container');
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const midPoint = rect.width / 2;
+        
+        if (x < midPoint) {
+            // Double tap left - seek back 10s
+            seekBySeconds(-10);
+            showSeekIndicator('left');
+        } else {
+            // Double tap right - seek forward 10s
+            seekBySeconds(10);
+            showSeekIndicator('right');
+        }
+    }
+    
+    function seekBySeconds(seconds) {
+        if (!player) return;
+        
+        if (currentVideoType === 'youtube') {
+            player.seekTo(player.getCurrentTime() + seconds, true);
+        } else if (currentVideoType === 'local') {
+            player.currentTime = Math.max(0, Math.min(player.duration, player.currentTime + seconds));
+        }
+    }
+    
+    function showSeekIndicator(side) {
+        const indicator = document.getElementById(side === 'left' ? 'seek-left-indicator' : 'seek-right-indicator');
+        indicator.classList.add('show');
+        setTimeout(() => indicator.classList.remove('show'), 500);
+    }
+    
+    function changeVolumeDirect(volume) {
+        if (!player) return;
+        
+        if (currentVideoType === 'youtube') {
+            player.setVolume(volume);
+        } else if (currentVideoType === 'local') {
+            player.volume = volume / 100;
+        }
+        
+        document.getElementById('volume-slider').value = volume;
+        isMuted = volume === 0;
+        document.getElementById('volume-icon').style.display = isMuted ? 'none' : 'block';
+        document.getElementById('mute-icon').style.display = isMuted ? 'block' : 'none';
+    }
+    
+    // Setup seek areas
+    function setupSeekAreas() {
+        const seekLeft = document.getElementById('seek-left');
+        const seekRight = document.getElementById('seek-right');
+        
+        // Double tap to seek
+        let lastTapLeft = 0;
+        let lastTapRight = 0;
+        
+        seekLeft.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTapLeft < 300) {
+                e.preventDefault();
+                seekBySeconds(-10);
+                showSeekIndicator('left');
+            }
+            lastTapLeft = now;
+        });
+        
+        seekRight.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTapRight < 300) {
+                e.preventDefault();
+                seekBySeconds(10);
+                showSeekIndicator('right');
+            }
+            lastTapRight = now;
+        });
     }
 
     function initYouTubePlayer(videoId) {
-        const container = document.getElementById('video-container');
-        container.innerHTML = '<div id="yt-player"></div>';
-        
-        // Show custom controls for YouTube
-        document.querySelector('.custom-controls').style.display = 'block';
+        const transformWrapper = document.getElementById('video-transform-wrapper');
+        transformWrapper.innerHTML = '<div id="yt-player"></div>';
         
         if (!ytApiReady) {
-            // Wait for API
             const checkApi = setInterval(() => {
                 if (ytApiReady) {
                     clearInterval(checkApi);
@@ -719,7 +1143,8 @@
             events: {
                 'onReady': onYouTubeReady,
                 'onStateChange': onYouTubeStateChange,
-                'onError': onYouTubeError
+                'onError': onYouTubeError,
+                'onPlaybackQualityChange': onQualityChange
             }
         });
     }
@@ -750,16 +1175,88 @@
     function onYouTubeError(event) {
         console.error('YouTube Error:', event.data);
     }
+    
+    function onQualityChange(event) {
+        console.log('Quality changed to:', event.data);
+    }
+    
+    // Set video quality
+    function setQuality(quality) {
+        currentQuality = quality;
+        if (player && currentVideoType === 'youtube' && player.setPlaybackQuality) {
+            player.setPlaybackQuality(quality);
+        }
+        
+        // Update UI
+        document.querySelectorAll('.quality-option').forEach(opt => {
+            opt.classList.remove('active');
+            if (opt.dataset.quality === quality) {
+                opt.classList.add('active');
+            }
+        });
+        
+        // Update button text
+        const qualityNames = {
+            'hd1080': '1080p',
+            'hd720': '720p',
+            'large': '480p',
+            'medium': '360p',
+            'small': '240p'
+        };
+        document.getElementById('quality-btn').textContent = qualityNames[quality] || 'HD';
+        
+        // Close menu
+        document.getElementById('quality-menu').classList.remove('show');
+    }
+    
+    // Local video player
+    function initLocalPlayer(videoUrl) {
+        const transformWrapper = document.getElementById('video-transform-wrapper');
+        transformWrapper.innerHTML = `<video id="local-video" style="width:100%;height:100%;object-fit:contain;" playsinline></video>`;
+        
+        const video = document.getElementById('local-video');
+        video.src = videoUrl;
+        player = video;
+        
+        video.addEventListener('loadedmetadata', () => {
+            document.getElementById('duration').textContent = formatTime(video.duration);
+        });
+        
+        video.addEventListener('play', () => {
+            isPlaying = true;
+            updatePlayPauseIcon(true);
+            document.getElementById('big-play-btn').classList.add('hidden');
+        });
+        
+        video.addEventListener('pause', () => {
+            isPlaying = false;
+            updatePlayPauseIcon(false);
+        });
+        
+        video.addEventListener('ended', () => {
+            isPlaying = false;
+            updatePlayPauseIcon(false);
+            document.getElementById('big-play-btn').classList.remove('hidden');
+        });
+        
+        video.addEventListener('timeupdate', () => {
+            if (isPlaying) {
+                const progress = (video.currentTime / video.duration) * 100;
+                document.getElementById('current-time').textContent = formatTime(video.currentTime);
+                document.getElementById('progress-bar').style.width = progress + '%';
+            }
+        });
+        
+        video.volume = currentVolume / 100;
+        video.play();
+    }
 
     function initVimeoPlayer(videoId) {
         const container = document.getElementById('video-container');
-        // Use Vimeo player with controls enabled
         container.innerHTML = `<iframe src="https://player.vimeo.com/video/${videoId}?autoplay=1&controls=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
         
         document.getElementById('big-play-btn').classList.add('hidden');
-        
-        // Hide custom controls for Vimeo since we're using native controls
-        document.querySelector('.custom-controls').style.display = 'none';
+        document.getElementById('custom-controls').style.display = 'none';
         
         player = container.querySelector('iframe');
     }
@@ -779,12 +1276,126 @@
         // Speed
         document.getElementById('speed-btn').onclick = cycleSpeed;
         
+        // Quality
+        document.getElementById('quality-btn').onclick = toggleQualityMenu;
+        
         // Fullscreen
         document.getElementById('fullscreen-btn').onclick = toggleFullscreen;
         
         // Show/hide controls on hover
         playerWrapper.onmousemove = showControls;
         playerWrapper.onmouseleave = hideControls;
+        
+        // Close quality menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.quality-dropdown')) {
+                document.getElementById('quality-menu').classList.remove('show');
+            }
+        });
+    }
+    
+    function toggleQualityMenu() {
+        const menu = document.getElementById('quality-menu');
+        menu.classList.toggle('show');
+    }
+    
+    // Setup zoom and rotate controls
+    function setupTransformControls() {
+        document.getElementById('zoom-in-btn').onclick = () => adjustZoom(zoomStep);
+        document.getElementById('zoom-out-btn').onclick = () => adjustZoom(-zoomStep);
+        document.getElementById('rotate-left-btn').onclick = () => adjustRotation(-90);
+        document.getElementById('rotate-right-btn').onclick = () => adjustRotation(90);
+        document.getElementById('reset-transform-btn').onclick = resetTransform;
+        
+        const container = document.getElementById('video-container');
+        
+        // Pinch zoom for touch devices
+        container.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                initialPinchDistance = getPinchDistance(e.touches);
+                initialPinchZoom = currentZoom;
+            }
+        }, { passive: false });
+        
+        container.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const currentDistance = getPinchDistance(e.touches);
+                const scale = currentDistance / initialPinchDistance;
+                const newZoom = Math.min(maxZoom, Math.max(minZoom, initialPinchZoom * scale));
+                
+                // Auto-rotate when zooming
+                if (autoRotateEnabled && newZoom > 1.2 && currentRotation === 0) {
+                    currentRotation = 0; // Keep original rotation, or change to 90 for landscape
+                }
+                
+                currentZoom = newZoom;
+                applyTransform();
+                showZoomIndicator();
+            }
+        }, { passive: false });
+        
+        container.addEventListener('touchend', () => {
+            initialPinchDistance = 0;
+            setTimeout(hideZoomIndicator, 1500);
+        });
+        
+        // Mouse wheel zoom
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
+            adjustZoom(delta);
+        }, { passive: false });
+    }
+    
+    function getPinchDistance(touches) {
+        return Math.hypot(
+            touches[0].clientX - touches[1].clientX,
+            touches[0].clientY - touches[1].clientY
+        );
+    }
+    
+    function adjustZoom(delta) {
+        currentZoom = Math.min(maxZoom, Math.max(minZoom, currentZoom + delta));
+        applyTransform();
+        showZoomIndicator();
+        setTimeout(hideZoomIndicator, 1500);
+    }
+    
+    function adjustRotation(delta) {
+        currentRotation = (currentRotation + delta) % 360;
+        applyTransform();
+        showZoomIndicator();
+        setTimeout(hideZoomIndicator, 1500);
+    }
+    
+    function resetTransform() {
+        currentZoom = 1;
+        currentRotation = 0;
+        applyTransform();
+        showZoomIndicator();
+        setTimeout(hideZoomIndicator, 1500);
+    }
+    
+    function applyTransform() {
+        const transformWrapper = document.getElementById('video-transform-wrapper');
+        if (transformWrapper) {
+            transformWrapper.style.transform = `scale(${currentZoom}) rotate(${currentRotation}deg)`;
+            transformWrapper.style.willChange = 'transform';
+        }
+        document.getElementById('zoom-level').textContent = currentZoom.toFixed(2) + 'x';
+    }
+    
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoom-indicator');
+        indicator.textContent = `${currentZoom.toFixed(1)}x | ${currentRotation}°`;
+        indicator.classList.add('visible');
+    }
+    
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoom-indicator');
+        indicator.classList.remove('visible');
     }
     
     function togglePlayPause() {
@@ -796,12 +1407,25 @@
             } else {
                 player.playVideo();
             }
+        } else if (currentVideoType === 'local') {
+            if (isPlaying) {
+                player.pause();
+            } else {
+                player.play();
+            }
         }
     }
     
     function updatePlayPauseIcon(playing) {
         document.getElementById('play-icon').style.display = playing ? 'none' : 'block';
         document.getElementById('pause-icon').style.display = playing ? 'block' : 'none';
+        
+        const quickPlay = document.getElementById('quick-play');
+        if (quickPlay) {
+            quickPlay.innerHTML = playing 
+                ? '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'
+                : '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+        }
     }
     
     function startProgressUpdate() {
@@ -817,7 +1441,6 @@
             document.getElementById('current-time').textContent = formatTime(current);
             document.getElementById('progress-bar').style.width = progress + '%';
             
-            // Update buffered
             if (player.getVideoBytesLoaded) {
                 const buffered = player.getVideoBytesLoaded() * 100;
                 document.getElementById('buffered-bar').style.width = buffered + '%';
@@ -830,45 +1453,43 @@
     }
     
     function seekVideo(e) {
-        if (!player || currentVideoType !== 'youtube') return;
+        if (!player) return;
         
         const rect = e.currentTarget.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
-        const duration = player.getDuration();
-        player.seekTo(percent * duration, true);
+        
+        if (currentVideoType === 'youtube') {
+            const duration = player.getDuration();
+            player.seekTo(percent * duration, true);
+        } else if (currentVideoType === 'local') {
+            player.currentTime = percent * player.duration;
+        }
         
         document.getElementById('progress-bar').style.width = (percent * 100) + '%';
     }
     
     function toggleMute() {
-        if (!player || currentVideoType !== 'youtube') return;
+        if (!player) return;
         
         isMuted = !isMuted;
-        if (isMuted) {
-            player.mute();
-            document.getElementById('volume-icon').style.display = 'none';
-            document.getElementById('mute-icon').style.display = 'block';
-        } else {
-            player.unMute();
-            document.getElementById('volume-icon').style.display = 'block';
-            document.getElementById('mute-icon').style.display = 'none';
+        
+        if (currentVideoType === 'youtube') {
+            if (isMuted) {
+                player.mute();
+            } else {
+                player.unMute();
+            }
+        } else if (currentVideoType === 'local') {
+            player.muted = isMuted;
         }
+        
+        document.getElementById('volume-icon').style.display = isMuted ? 'none' : 'block';
+        document.getElementById('mute-icon').style.display = isMuted ? 'block' : 'none';
     }
     
     function changeVolume(e) {
         currentVolume = parseInt(e.target.value);
-        if (!player || currentVideoType !== 'youtube') return;
-        
-        player.setVolume(currentVolume);
-        if (currentVolume === 0) {
-            isMuted = true;
-            document.getElementById('volume-icon').style.display = 'none';
-            document.getElementById('mute-icon').style.display = 'block';
-        } else {
-            isMuted = false;
-            document.getElementById('volume-icon').style.display = 'block';
-            document.getElementById('mute-icon').style.display = 'none';
-        }
+        changeVolumeDirect(currentVolume);
     }
     
     function cycleSpeed() {
@@ -878,8 +1499,13 @@
         
         document.getElementById('speed-btn').textContent = playbackSpeed + 'x';
         
-        if (!player || currentVideoType !== 'youtube') return;
-        player.setPlaybackRate(playbackSpeed);
+        if (!player) return;
+        
+        if (currentVideoType === 'youtube') {
+            player.setPlaybackRate(playbackSpeed);
+        } else if (currentVideoType === 'local') {
+            player.playbackRate = playbackSpeed;
+        }
     }
     
     function toggleFullscreen() {
@@ -954,7 +1580,7 @@
     
     // Keyboard controls
     document.addEventListener('keydown', (e) => {
-        if (!player || currentVideoType !== 'youtube') return;
+        if (!player) return;
         
         switch(e.key) {
             case ' ':
@@ -963,28 +1589,42 @@
                 togglePlayPause();
                 break;
             case 'ArrowLeft':
-                player.seekTo(player.getCurrentTime() - 10);
+                seekBySeconds(-10);
                 break;
             case 'ArrowRight':
-                player.seekTo(player.getCurrentTime() + 10);
+                seekBySeconds(10);
                 break;
             case 'ArrowUp':
                 e.preventDefault();
                 currentVolume = Math.min(100, currentVolume + 10);
-                player.setVolume(currentVolume);
-                document.getElementById('volume-slider').value = currentVolume;
+                changeVolumeDirect(currentVolume);
                 break;
             case 'ArrowDown':
                 e.preventDefault();
                 currentVolume = Math.max(0, currentVolume - 10);
-                player.setVolume(currentVolume);
-                document.getElementById('volume-slider').value = currentVolume;
+                changeVolumeDirect(currentVolume);
                 break;
             case 'm':
                 toggleMute();
                 break;
             case 'f':
                 toggleFullscreen();
+                break;
+            case '+':
+            case '=':
+                adjustZoom(zoomStep);
+                break;
+            case '-':
+                adjustZoom(-zoomStep);
+                break;
+            case 'r':
+                adjustRotation(90);
+                break;
+            case 'R':
+                adjustRotation(-90);
+                break;
+            case '0':
+                resetTransform();
                 break;
         }
     });
