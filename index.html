@@ -136,7 +136,7 @@
         border: none;
     }
     
-    /* Video Transform Container for Zoom/Rotate */
+    /* Video Transform Container for Zoom */
     .video-transform-wrapper {
         position: absolute;
         top: 0;
@@ -397,7 +397,6 @@
     
     .zoom-btn { width: 32px; height: 32px; font-size: 16px; font-weight: bold; }
     .zoom-level { font-size: 11px; min-width: 35px; text-align: center; color: var(--neon); }
-    .rotate-btn { width: 32px; height: 32px; }
     
     /* Pinch zoom indicator */
     .zoom-indicator {
@@ -450,6 +449,26 @@
     }
     
     .quick-btn svg { width: 28px; height: 28px; fill: var(--neon); }
+    
+    /* Quick Zoom Button */
+    .quick-zoom-btn {
+        position: relative;
+        flex-direction: column;
+    }
+    .quick-zoom-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+    .quick-zoom-level {
+        position: absolute;
+        bottom: -8px;
+        font-size: 10px;
+        color: var(--neon);
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 2px 5px;
+        border-radius: 8px;
+    }
     
     /* Double tap areas for seek */
     .seek-area-left, .seek-area-right {
@@ -573,7 +592,7 @@
             <div class="folder-grid">
                 <div class="folder-card" style="border: 1px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>📚 SUMMARY BOOKS</h3><button class="view-btn" onclick="openSummaryBooks()">Open Books</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ffcc00;"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>Theory Session</h3><button class="view-btn" onclick="openTheorySession()">Open Folder</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යාව Session</h3><button class="view-btn" onclick="openDaraSession()">Open Folder</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>පරා විද්‍යාව Session</h3><button class="view-btn" onclick="openDaraSession()">Open Folder</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/i-r4erXKQsM/hqdefault.jpg');"></div><div class="folder-content"><h3>කාර්යය, ශක්තිය, බලය</h3><button class="view-btn" onclick="playMedia('youtube', 'i-r4erXKQsM')">Watch</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ff6600;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ASvTInTQ6us/hqdefault.jpg');"></div><div class="folder-content"><h3>Paper Discussion</h3><button class="view-btn" onclick="openPaperDiscussion()">Open Folder</button></div></div>
             </div>
@@ -687,11 +706,11 @@
         <div id="dara-session-view" style="display:none">
             <div class="section-title">ධාරා විද්‍යුත්වය - FULL SESSIONS</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය  DAY 01</h3><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 01</h3><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 02</h3><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/0NiXrjA8gnA/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 03</h3><button class="view-btn" onclick="playMedia('youtube', '0NiXrjA8gnA')">Watch</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lfkqvYR5r9w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 04</h3><button class="view-btn" onclick="playMedia('youtube', 'lfkqvYR5r9w')">Watch</button></div></div>
-                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1V_FZE1lw5w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 05</h3><button class="view-btn" onclick="playMedia('youtube', '1V_FZE1lw5w')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1V_FZE1lw5w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 05</h3><button class="view-btn" onclick="playMedia('youtube', '1V_FZE1lw5w')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
@@ -710,14 +729,30 @@
                 
                 <!-- Quick Controls on Video Layer -->
                 <div class="quick-controls" id="quick-controls">
+                    <!-- Skip Back Button -->
+                    <button class="quick-btn" id="quick-skip-back" title="Skip Back 10s">
+                        <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="14" text-anchor="middle" font-size="6" fill="white">10</text></svg>
+                    </button>
+                    <!-- Volume Down -->
                     <button class="quick-btn" id="quick-volume-down" title="Volume Down">
                         <svg viewBox="0 0 24 24"><path d="M5 9v6h4l5 5V4L9 9H5z"/></svg>
                     </button>
+                    <!-- Play/Pause -->
                     <button class="quick-btn" id="quick-play" title="Play/Pause">
                         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </button>
+                    <!-- Volume Up -->
                     <button class="quick-btn" id="quick-volume-up" title="Volume Up">
                         <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                    </button>
+                    <!-- Skip Forward Button -->
+                    <button class="quick-btn" id="quick-skip-forward" title="Skip Forward 10s">
+                        <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="14" text-anchor="middle" font-size="6" fill="white">10</text></svg>
+                    </button>
+                    <!-- Zoom Button for Mobile -->
+                    <button class="quick-btn quick-zoom-btn" id="quick-zoom" title="Zoom">
+                        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+                        <span class="quick-zoom-level" id="quick-zoom-level">1x</span>
                     </button>
                 </div>
                 
@@ -751,20 +786,6 @@
                                 <button class="control-btn zoom-btn" id="zoom-out-btn" title="Zoom Out">−</button>
                                 <span class="zoom-level" id="zoom-level">1x</span>
                                 <button class="control-btn zoom-btn" id="zoom-in-btn" title="Zoom In">+</button>
-                            </div>
-                            
-                            <!-- Rotate Controls -->
-                            <div class="toolbar-group">
-                                <span class="toolbar-label">Rotate</span>
-                                <button class="control-btn rotate-btn" id="rotate-left-btn" title="Rotate Left">
-                                    <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
-                                </button>
-                                <button class="control-btn rotate-btn" id="rotate-right-btn" title="Rotate Right">
-                                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.01l.01.01L11.5 10l4-4v3h5v2h-5v3zm-3-6c-3.54 0-6.55 2.31-7.6 5.5l2.37.78C8.32 12.31 10.96 11 14 11c.68 0 1.35.08 2 .23V10.1c-.65-.07-1.32-.1-2-.1-3.54 0-6.55 2.31-7.6 5.5l2.37.78C7.82 14.81 9.96 14 12.5 14z"/></svg>
-                                </button>
-                                <button class="control-btn rotate-btn" id="reset-transform-btn" title="Reset">
-                                    <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
-                                </button>
                             </div>
                             
                             <div class="volume-control">
@@ -802,7 +823,7 @@
     <div id="contact" class="page-section">
         <div class="section-title">Contact Support</div>
         <div style="max-width: 400px; margin: auto;">
-            <a href="https://t.me/cyberdtcontactbot" target="_blank" class="contact-link">✈ Telegram Support Bot</a>
+            <a href="https://t.me/cyberdtwebloginbot" target="_blank" class="contact-link">✈ Telegram Support Bot</a>
             <a href="https://t.me/cyberdt1" target="_blank" class="contact-link">📢 Official Channel</a>
         </div>
     </div>
@@ -824,13 +845,11 @@
     let currentQuality = 'large';
     let userName = '';
     
-    // Zoom and Rotate state
+    // Zoom state
     let currentZoom = 1;
-    let currentRotation = 0;
     let minZoom = 0.5;
     let maxZoom = 3;
     let zoomStep = 0.25;
-    let autoRotateEnabled = true;
     
     // Touch/pinch zoom state
     let initialPinchDistance = 0;
@@ -885,7 +904,7 @@
     function requestKey() {
         const name = document.getElementById('regName').value;
         if(!name) { alert("Enter Name!"); return; }
-        window.open(`https://t.me/cyberdtsecurebot?text=Hello, I am ${name}. Give me a Key.`, '_blank');
+        window.open(`https://t.me/cyberdtwebloginbot?text=Hello, I am ${name}. Give me a Key.`, '_blank');
     }
 
     function showPage(p) {
@@ -948,7 +967,7 @@
             const iframe = container.querySelector('iframe');
             if (iframe) iframe.remove();
         }
-        resetTransform();
+        resetZoom();
     }
 
     function playMedia(type, id) {
@@ -1029,6 +1048,37 @@
         };
         
         document.getElementById('quick-play').onclick = togglePlayPause;
+        
+        // Skip buttons
+        document.getElementById('quick-skip-back').onclick = () => {
+            seekBySeconds(-10);
+        };
+        
+        document.getElementById('quick-skip-forward').onclick = () => {
+            seekBySeconds(10);
+        };
+        
+        // Quick zoom button
+        document.getElementById('quick-zoom').onclick = () => {
+            // Cycle through zoom levels: 1x -> 1.5x -> 2x -> 1x
+            if (currentZoom >= 2) {
+                currentZoom = 1;
+            } else if (currentZoom >= 1.5) {
+                currentZoom = 2;
+            } else {
+                currentZoom = 1.5;
+            }
+            applyTransform();
+            showZoomIndicator();
+            updateQuickZoomLevel();
+        };
+    }
+    
+    function updateQuickZoomLevel() {
+        const zoomLevelEl = document.getElementById('quick-zoom-level');
+        if (zoomLevelEl) {
+            zoomLevelEl.textContent = currentZoom.toFixed(1) + 'x';
+        }
     }
     
     function handleDoubleTap(e) {
@@ -1300,14 +1350,10 @@
         menu.classList.toggle('show');
     }
     
-    // Setup zoom and rotate controls
+    // Setup zoom controls
     function setupTransformControls() {
         document.getElementById('zoom-in-btn').onclick = () => adjustZoom(zoomStep);
         document.getElementById('zoom-out-btn').onclick = () => adjustZoom(-zoomStep);
-        document.getElementById('rotate-left-btn').onclick = () => adjustRotation(-90);
-        document.getElementById('rotate-right-btn').onclick = () => adjustRotation(90);
-        document.getElementById('reset-transform-btn').onclick = resetTransform;
-        
         const container = document.getElementById('video-container');
         
         // Pinch zoom for touch devices
@@ -1325,12 +1371,6 @@
                 const currentDistance = getPinchDistance(e.touches);
                 const scale = currentDistance / initialPinchDistance;
                 const newZoom = Math.min(maxZoom, Math.max(minZoom, initialPinchZoom * scale));
-                
-                // Auto-rotate when zooming
-                if (autoRotateEnabled && newZoom > 1.2 && currentRotation === 0) {
-                    currentRotation = 0; // Keep original rotation, or change to 90 for landscape
-                }
-                
                 currentZoom = newZoom;
                 applyTransform();
                 showZoomIndicator();
@@ -1364,16 +1404,8 @@
         setTimeout(hideZoomIndicator, 1500);
     }
     
-    function adjustRotation(delta) {
-        currentRotation = (currentRotation + delta) % 360;
-        applyTransform();
-        showZoomIndicator();
-        setTimeout(hideZoomIndicator, 1500);
-    }
-    
-    function resetTransform() {
+    function resetZoom() {
         currentZoom = 1;
-        currentRotation = 0;
         applyTransform();
         showZoomIndicator();
         setTimeout(hideZoomIndicator, 1500);
@@ -1382,15 +1414,15 @@
     function applyTransform() {
         const transformWrapper = document.getElementById('video-transform-wrapper');
         if (transformWrapper) {
-            transformWrapper.style.transform = `scale(${currentZoom}) rotate(${currentRotation}deg)`;
+            transformWrapper.style.transform = `scale(${currentZoom})`;
             transformWrapper.style.willChange = 'transform';
         }
-        document.getElementById('zoom-level').textContent = currentZoom.toFixed(2) + 'x';
+        document.getElementById('zoom-level').textContent = currentZoom.toFixed(1) + 'x';
     }
     
     function showZoomIndicator() {
         const indicator = document.getElementById('zoom-indicator');
-        indicator.textContent = `${currentZoom.toFixed(1)}x | ${currentRotation}°`;
+        indicator.textContent = `${currentZoom.toFixed(1)}x`;
         indicator.classList.add('visible');
     }
     
@@ -1618,17 +1650,11 @@
             case '-':
                 adjustZoom(-zoomStep);
                 break;
-            case 'r':
-                adjustRotation(90);
-                break;
-            case 'R':
-                adjustRotation(-90);
-                break;
             case '0':
-                resetTransform();
+                resetZoom();
                 break;
         }
     });
 </script>
 </body>
-</html>
+</html><!-- Updated: Wed Mar 11 07:51:28 UTC 2026 -->
