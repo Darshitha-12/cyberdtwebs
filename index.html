@@ -146,6 +146,24 @@
         will-change: transform;
     }
     
+    /* Hide YouTube Logo/Watermark in bottom right corner */
+    .youtube-logo-hide {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 140px;
+        height: 50px;
+        background: linear-gradient(to left, #000 0%, rgba(0,0,0,0.9) 40%, transparent 100%);
+        z-index: 8;
+        pointer-events: none;
+        display: block;
+    }
+    
+    /* Hide YouTube watermark when controls are hidden */
+    .custom-player-wrapper.hide-controls .youtube-logo-hide {
+        opacity: 0;
+    }
+    
     /* Enhanced Big Play Button - LARGER AND MORE VISIBLE */
     .big-play-btn {
         position: absolute;
@@ -831,6 +849,8 @@
                 
                 <div class="video-container" id="video-container">
                     <div class="video-transform-wrapper" id="video-transform-wrapper"></div>
+                    <!-- Hide YouTube Logo/Watermark -->
+                    <div class="youtube-logo-hide" id="youtube-logo-hide"></div>
                 </div>
                 
                 <!-- Enhanced Big Play Button -->
@@ -1203,7 +1223,8 @@
                 'showinfo': 0,
                 'playsinline': 1,
                 'cc_load_policy': 0,
-                'origin': window.location.origin
+                'origin': window.location.origin,
+                'widget_referrer': window.location.href
             },
             events: {
                 'onReady': onYouTubeReady,
@@ -1286,12 +1307,37 @@
     
     function setQuality(quality) {
         currentQuality = quality;
-        if (player && currentVideoType === 'youtube' && player.setPlaybackQuality) {
-            player.setPlaybackQuality(quality);
-        }
         
+        // Update UI immediately
         updateQualityDisplay(quality);
         document.getElementById('quality-menu').classList.remove('show');
+        
+        // Set quality on YouTube player
+        if (player && currentVideoType === 'youtube') {
+            try {
+                // Use setPlaybackQuality for YouTube API
+                if (typeof player.setPlaybackQuality === 'function') {
+                    player.setPlaybackQuality(quality);
+                    console.log('Quality set to:', quality);
+                }
+                
+                // Also try using cueVideoById with preferred quality for better results
+                const currentTime = player.getCurrentTime ? player.getCurrentTime() : 0;
+                const videoId = currentVideoId;
+                
+                // Force quality change by reloading with specific quality
+                if (typeof player.cueVideoById === 'function' && typeof player.playVideo === 'function') {
+                    player.cueVideoById({
+                        videoId: videoId,
+                        startSeconds: currentTime,
+                        suggestedQuality: quality
+                    });
+                    player.playVideo();
+                }
+            } catch (e) {
+                console.error('Error setting quality:', e);
+            }
+        }
     }
 
     // ========== LOCAL VIDEO PLAYER ==========
