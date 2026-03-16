@@ -420,51 +420,6 @@
         padding: 8px 12px;
     }
     
-    .quality-dropdown { 
-        position: relative; 
-    }
-    
-    .quality-menu {
-        position: absolute;
-        bottom: 100%;
-        right: 0;
-        background: rgba(0, 0, 0, 0.98);
-        border: 2px solid var(--neon);
-        border-radius: 12px;
-        padding: 10px 0;
-        display: none;
-        min-width: 130px;
-        z-index: 100;
-        margin-bottom: 10px;
-        box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
-    }
-    
-    .quality-menu.show { display: block; }
-    
-    .quality-option {
-        display: block;
-        width: 100%;
-        padding: 10px 18px;
-        background: none;
-        border: none;
-        color: #fff;
-        text-align: left;
-        cursor: pointer;
-        font-size: 13px;
-        transition: 0.2s;
-        font-weight: 500;
-    }
-    
-    .quality-option:hover { 
-        background: rgba(0, 242, 255, 0.2); 
-        color: var(--neon); 
-    }
-    
-    .quality-option.active { 
-        color: var(--neon); 
-        background: rgba(0, 242, 255, 0.1);
-    }
-    
     /* Fullscreen Styles */
     .custom-player-wrapper.fullscreen {
         position: fixed;
@@ -907,17 +862,8 @@
                             <!-- Speed Control -->
                             <button class="control-btn speed-btn" id="speed-btn" title="Playback Speed">1x</button>
                             
-                            <!-- Quality Control - ENHANCED -->
-                            <div class="quality-dropdown">
-                                <button class="control-btn quality-btn" id="quality-btn" title="Video Quality">HD</button>
-                                <div class="quality-menu" id="quality-menu">
-                                    <button class="quality-option" data-quality="hd1080" onclick="setQuality('hd1080')">1080p HD</button>
-                                    <button class="quality-option" data-quality="hd720" onclick="setQuality('hd720')">720p HD</button>
-                                    <button class="quality-option active" data-quality="large" onclick="setQuality('large')">480p</button>
-                                    <button class="quality-option" data-quality="medium" onclick="setQuality('medium')">360p</button>
-                                    <button class="quality-option" data-quality="small" onclick="setQuality('small')">240p</button>
-                                </div>
-                            </div>
+                            <!-- Quality Badge (Auto HD) -->
+                            <span class="control-btn quality-btn" id="quality-btn" title="Auto HD Quality" style="cursor: default; font-size: 12px; font-weight: bold; min-width: 65px; background: rgba(0, 242, 255, 0.2); border-radius: 8px; padding: 8px 12px;">HD</span>
                             
                             <!-- Fullscreen Button -->
                             <button class="control-btn expand-btn" id="fullscreen-btn" title="Fullscreen (F)">
@@ -1224,7 +1170,8 @@
                 'playsinline': 1,
                 'cc_load_policy': 0,
                 'origin': window.location.origin,
-                'widget_referrer': window.location.href
+                'widget_referrer': window.location.href,
+                'vq': 'hd1080' // Request highest quality
             },
             events: {
                 'onReady': onYouTubeReady,
@@ -1241,11 +1188,41 @@
         document.getElementById('duration').textContent = formatTime(player.getDuration());
         player.setVolume(currentVolume);
         player.setPlaybackRate(playbackSpeed);
+        
+        // Set highest available quality
+        setHighestQuality();
+        
         event.target.playVideo();
         
         // Update quality button to show current quality
         const currentQ = player.getPlaybackQuality();
         updateQualityDisplay(currentQ);
+    }
+    
+    // Function to set highest available quality
+    function setHighestQuality() {
+        if (!player || currentVideoType !== 'youtube') return;
+        
+        // Try to get available quality levels
+        const availableQuality = player.getAvailableQualityLevels();
+        console.log('Available qualities:', availableQuality);
+        
+        // Quality priority: hd1080 > hd720 > large > medium > small
+        const qualityPriority = ['hd1080', 'hd720', 'large', 'medium', 'small'];
+        
+        let bestQuality = 'auto';
+        for (let q of qualityPriority) {
+            if (availableQuality && availableQuality.includes(q)) {
+                bestQuality = q;
+                break;
+            }
+        }
+        
+        // Set the best quality
+        if (bestQuality !== 'auto' && player.setPlaybackQuality) {
+            player.setPlaybackQuality(bestQuality);
+            console.log('Set quality to:', bestQuality);
+        }
     }
     
     function onYouTubeStateChange(event) {
@@ -1286,57 +1263,17 @@
     
     function updateQualityDisplay(quality) {
         const qualityNames = {
-            'hd1080': '1080p',
-            'hd720': '720p',
+            'hd1080': 'HD',
+            'hd720': 'HD',
             'large': '480p',
             'medium': '360p',
             'small': '240p',
             'tiny': '144p',
-            'auto': 'Auto'
+            'auto': 'HD'
         };
-        document.getElementById('quality-btn').textContent = qualityNames[quality] || 'HD';
-        
-        // Update active state in menu
-        document.querySelectorAll('.quality-option').forEach(opt => {
-            opt.classList.remove('active');
-            if (opt.dataset.quality === quality) {
-                opt.classList.add('active');
-            }
-        });
-    }
-    
-    function setQuality(quality) {
-        currentQuality = quality;
-        
-        // Update UI immediately
-        updateQualityDisplay(quality);
-        document.getElementById('quality-menu').classList.remove('show');
-        
-        // Set quality on YouTube player
-        if (player && currentVideoType === 'youtube') {
-            try {
-                // Use setPlaybackQuality for YouTube API
-                if (typeof player.setPlaybackQuality === 'function') {
-                    player.setPlaybackQuality(quality);
-                    console.log('Quality set to:', quality);
-                }
-                
-                // Also try using cueVideoById with preferred quality for better results
-                const currentTime = player.getCurrentTime ? player.getCurrentTime() : 0;
-                const videoId = currentVideoId;
-                
-                // Force quality change by reloading with specific quality
-                if (typeof player.cueVideoById === 'function' && typeof player.playVideo === 'function') {
-                    player.cueVideoById({
-                        videoId: videoId,
-                        startSeconds: currentTime,
-                        suggestedQuality: quality
-                    });
-                    player.playVideo();
-                }
-            } catch (e) {
-                console.error('Error setting quality:', e);
-            }
+        const qualityBtn = document.getElementById('quality-btn');
+        if (qualityBtn) {
+            qualityBtn.textContent = qualityNames[quality] || 'HD';
         }
     }
 
@@ -1420,21 +1357,7 @@
         
         document.getElementById('speed-btn').onclick = cycleSpeed;
         
-        document.getElementById('quality-btn').onclick = toggleQualityMenu;
-        
         document.getElementById('fullscreen-btn').onclick = toggleFullscreen;
-        
-        // Close quality menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.quality-dropdown')) {
-                document.getElementById('quality-menu').classList.remove('show');
-            }
-        });
-    }
-    
-    function toggleQualityMenu() {
-        const menu = document.getElementById('quality-menu');
-        menu.classList.toggle('show');
     }
 
     // ========== ZOOM CONTROLS ==========
