@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<![CDATA[<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -107,14 +107,15 @@
     .contact-link { display: block; background: #111; color: var(--neon); padding: 15px; margin: 10px 0; text-decoration: none; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
     .contact-link:hover { border-color: var(--neon); background: rgba(0, 242, 255, 0.1); }
 
-    /* Custom Video Player Styles */
+    /* Enhanced Custom Video Player Styles */
     .custom-player-wrapper {
         position: relative;
         width: 100%;
         background: #000;
         border-radius: 15px;
         overflow: hidden;
-        border: 1px solid var(--neon);
+        border: 2px solid var(--neon);
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
     }
     
     .video-container {
@@ -145,165 +146,15 @@
         will-change: transform;
     }
     
-    .custom-controls {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
-        padding: 25px 15px 15px;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.15s ease-out, visibility 0.15s ease-out;
-        z-index: 10;
-        pointer-events: none;
-        height: 0;
-        overflow: hidden;
-    }
-    
-    .custom-player-wrapper:hover .custom-controls,
-    .custom-player-wrapper.show-controls .custom-controls {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        height: auto;
-    }
-    
-    .progress-container {
-        width: 100%;
-        height: 6px;
-        background: rgba(255,255,255,0.2);
-        border-radius: 3px;
-        cursor: pointer;
-        margin-bottom: 15px;
-        position: relative;
-    }
-    
-    .progress-container:hover { height: 8px; }
-    
-    .progress-bar {
-        height: 100%;
-        background: var(--neon);
-        border-radius: 3px;
-        width: 0%;
-        position: relative;
-    }
-    
-    .progress-bar::after {
-        content: '';
-        position: absolute;
-        right: -6px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 14px;
-        height: 14px;
-        background: var(--neon);
-        border-radius: 50%;
-        box-shadow: 0 0 10px var(--neon);
-        opacity: 0;
-        transition: opacity 0.2s;
-    }
-    
-    .progress-container:hover .progress-bar::after { opacity: 1; }
-    
-    .buffered-bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        background: rgba(255,255,255,0.3);
-        border-radius: 3px;
-        width: 0%;
-    }
-    
-    .time-display {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        color: #fff;
-        margin-bottom: 12px;
-    }
-    
-    .time-display .current-time { color: var(--neon); font-weight: bold; }
-    
-    .controls-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    
-    .controls-left, .controls-right {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .control-btn {
-        background: none;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        padding: 8px;
-        border-radius: 50%;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 38px;
-        height: 38px;
-    }
-    
-    .control-btn:hover {
-        background: rgba(0, 242, 255, 0.2);
-        color: var(--neon);
-    }
-    
-    .control-btn svg { width: 22px; height: 22px; fill: currentColor; }
-    
-    .play-btn {
-        width: 48px;
-        height: 48px;
-        background: var(--neon);
-        color: #000 !important;
-    }
-    
-    .play-btn:hover {
-        background: #00d4e0;
-        transform: scale(1.1);
-    }
-    
-    .volume-control { display: flex; align-items: center; gap: 5px; }
-    
-    .volume-slider {
-        width: 70px;
-        height: 5px;
-        -webkit-appearance: none;
-        appearance: none;
-        background: rgba(255,255,255,0.3);
-        border-radius: 3px;
-        outline: none;
-    }
-    
-    .volume-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 14px;
-        height: 14px;
-        background: var(--neon);
-        border-radius: 50%;
-        cursor: pointer;
-    }
-    
+    /* Enhanced Big Play Button - LARGER AND MORE VISIBLE */
     .big-play-btn {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 80px;
-        height: 80px;
-        background: rgba(0, 242, 255, 0.9);
+        width: 100px;
+        height: 100px;
+        background: rgba(0, 242, 255, 0.95);
         border: none;
         border-radius: 50%;
         cursor: pointer;
@@ -312,49 +163,291 @@
         justify-content: center;
         transition: all 0.3s;
         z-index: 5;
+        box-shadow: 0 0 40px rgba(0, 242, 255, 0.6);
     }
     
     .big-play-btn:hover {
         background: var(--neon);
-        box-shadow: 0 0 40px var(--neon);
-        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 0 60px var(--neon), 0 0 100px rgba(0, 242, 255, 0.4);
+        transform: translate(-50%, -50%) scale(1.15);
     }
     
-    .big-play-btn svg { width: 35px; height: 35px; fill: #000; margin-left: 4px; }
+    .big-play-btn svg { width: 45px; height: 45px; fill: #000; margin-left: 5px; }
     .big-play-btn.hidden { display: none; }
     
-    .speed-btn { font-size: 12px; font-weight: bold; min-width: 42px; }
+    /* Enhanced Custom Controls - ALWAYS VISIBLE */
+    .custom-controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.5) 70%, transparent 100%);
+        padding: 30px 20px 20px;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+        z-index: 10;
+        pointer-events: auto;
+    }
     
-    .quality-btn { font-size: 11px; font-weight: bold; min-width: 48px; padding: 8px; }
-    .quality-dropdown { position: relative; }
+    .custom-player-wrapper.hide-controls .custom-controls {
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    /* Enhanced Progress Bar */
+    .progress-container {
+        width: 100%;
+        height: 8px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        position: relative;
+        transition: height 0.2s;
+    }
+    
+    .progress-container:hover { 
+        height: 12px; 
+    }
+    
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--neon), #00d4e0);
+        border-radius: 4px;
+        width: 0%;
+        position: relative;
+        transition: width 0.1s linear;
+    }
+    
+    .progress-bar::after {
+        content: '';
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        background: var(--neon);
+        border-radius: 50%;
+        box-shadow: 0 0 15px var(--neon), 0 0 30px rgba(0, 242, 255, 0.5);
+        opacity: 0;
+        transition: opacity 0.2s, transform 0.2s;
+    }
+    
+    .progress-container:hover .progress-bar::after { 
+        opacity: 1;
+        transform: translateY(-50%) scale(1.2);
+    }
+    
+    .buffered-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: rgba(255,255,255,0.3);
+        border-radius: 4px;
+        width: 0%;
+    }
+    
+    /* Time Display */
+    .time-display {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: #fff;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+    
+    .time-display .current-time { color: var(--neon); font-weight: bold; font-size: 15px; }
+    .time-display .duration { color: #aaa; }
+    
+    /* Enhanced Controls Row */
+    .controls-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .controls-left, .controls-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    /* Enhanced Control Buttons */
+    .control-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 50%;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 42px;
+        height: 42px;
+    }
+    
+    .control-btn:hover {
+        background: rgba(0, 242, 255, 0.25);
+        color: var(--neon);
+        transform: scale(1.1);
+    }
+    
+    .control-btn svg { width: 24px; height: 24px; fill: currentColor; }
+    
+    /* Enhanced Play Button - LARGER */
+    .play-btn {
+        min-width: 56px;
+        height: 56px;
+        background: var(--neon);
+        color: #000 !important;
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+    }
+    
+    .play-btn:hover {
+        background: #00d4e0;
+        transform: scale(1.15);
+        box-shadow: 0 0 30px var(--neon);
+    }
+    
+    .play-btn svg { width: 28px; height: 28px; }
+    
+    /* Volume Control */
+    .volume-control { 
+        display: flex; 
+        align-items: center; 
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 6px 12px;
+        border-radius: 25px;
+    }
+    
+    .volume-slider {
+        width: 80px;
+        height: 6px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: rgba(255,255,255,0.3);
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+    }
+    
+    .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background: var(--neon);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 10px var(--neon);
+    }
+    
+    /* Toolbar Group */
+    .toolbar-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+    }
+    
+    .toolbar-label { font-size: 11px; color: #888; text-transform: uppercase; margin-right: 6px; font-weight: bold; }
+    
+    /* Zoom Controls - ENHANCED */
+    .zoom-btn { 
+        min-width: 36px; 
+        height: 36px; 
+        font-size: 18px; 
+        font-weight: bold;
+        background: rgba(0, 242, 255, 0.15);
+    }
+    .zoom-btn:hover {
+        background: rgba(0, 242, 255, 0.3);
+    }
+    .zoom-level { 
+        font-size: 12px; 
+        min-width: 40px; 
+        text-align: center; 
+        color: var(--neon); 
+        font-weight: bold;
+    }
+    
+    /* Speed Button - ENHANCED */
+    .speed-btn { 
+        font-size: 13px; 
+        font-weight: bold; 
+        min-width: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 8px 12px;
+    }
+    
+    /* Quality Dropdown - ENHANCED */
+    .quality-btn { 
+        font-size: 12px; 
+        font-weight: bold; 
+        min-width: 65px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 8px 12px;
+    }
+    
+    .quality-dropdown { 
+        position: relative; 
+    }
+    
     .quality-menu {
         position: absolute;
         bottom: 100%;
         right: 0;
-        background: rgba(0, 0, 0, 0.95);
-        border: 1px solid var(--neon);
-        border-radius: 8px;
-        padding: 8px 0;
+        background: rgba(0, 0, 0, 0.98);
+        border: 2px solid var(--neon);
+        border-radius: 12px;
+        padding: 10px 0;
         display: none;
-        min-width: 110px;
+        min-width: 130px;
         z-index: 100;
+        margin-bottom: 10px;
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
     }
+    
     .quality-menu.show { display: block; }
+    
     .quality-option {
         display: block;
         width: 100%;
-        padding: 8px 15px;
+        padding: 10px 18px;
         background: none;
         border: none;
         color: #fff;
         text-align: left;
         cursor: pointer;
-        font-size: 12px;
+        font-size: 13px;
         transition: 0.2s;
+        font-weight: 500;
     }
-    .quality-option:hover { background: rgba(0, 242, 255, 0.2); color: var(--neon); }
-    .quality-option.active { color: var(--neon); }
     
+    .quality-option:hover { 
+        background: rgba(0, 242, 255, 0.2); 
+        color: var(--neon); 
+    }
+    
+    .quality-option.active { 
+        color: var(--neon); 
+        background: rgba(0, 242, 255, 0.1);
+    }
+    
+    /* Fullscreen Styles */
     .custom-player-wrapper.fullscreen {
         position: fixed;
         top: 0;
@@ -363,33 +456,139 @@
         height: 100vh;
         z-index: 9999;
         border-radius: 0;
+        border: none;
     }
     
     .custom-player-wrapper.fullscreen .video-container {
         padding-bottom: 0;
         height: 100%;
     }
+    
+    .custom-player-wrapper.fullscreen .custom-controls {
+        padding: 40px 30px 25px;
+    }
 
-    .toolbar-group {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        padding: 4px 8px;
-        background: rgba(255, 255, 255, 0.1);
+    /* Expand/Resize Button - NEW */
+    .expand-btn {
+        background: rgba(0, 242, 255, 0.2);
         border-radius: 8px;
     }
     
-    .toolbar-label { font-size: 10px; color: #888; text-transform: uppercase; margin-right: 4px; }
+    /* Video Title Overlay */
+    .video-title-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 15px 20px;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+        z-index: 5;
+        opacity: 1;
+        transition: opacity 0.3s;
+    }
     
-    .zoom-btn { width: 32px; height: 32px; font-size: 16px; font-weight: bold; }
-    .zoom-level { font-size: 11px; min-width: 35px; text-align: center; color: var(--neon); }
+    .custom-player-wrapper.hide-controls .video-title-overlay {
+        opacity: 0;
+    }
     
-    .zoom-indicator {
+    .video-title-overlay h3 {
+        margin: 0;
+        color: var(--neon);
+        font-size: 14px;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(0, 242, 255, 0.2);
+        border-top-color: var(--neon);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 4;
         display: none;
     }
     
-    .quick-controls {
-        display: none !important;
+    .loading-spinner.show {
+        display: block;
+    }
+    
+    @keyframes spin {
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Channel Logo Watermark */
+    .channel-watermark {
+        position: absolute;
+        bottom: 80px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 8px 15px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 6;
+        transition: opacity 0.3s;
+    }
+    
+    .channel-watermark img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
+    
+    .channel-watermark span {
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 600px) {
+        .control-btn {
+            min-width: 36px;
+            height: 36px;
+            padding: 8px;
+        }
+        
+        .play-btn {
+            min-width: 48px;
+            height: 48px;
+        }
+        
+        .control-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .volume-slider {
+            width: 60px;
+        }
+        
+        .toolbar-label {
+            display: none;
+        }
+        
+        .custom-controls {
+            padding: 20px 15px 15px;
+        }
+        
+        .big-play-btn {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .big-play-btn svg {
+            width: 35px;
+            height: 35px;
+        }
     }
 </style>
 <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
@@ -458,10 +657,10 @@
         
         <div class="section-title">Tutorials</div>
         <div class="folder-grid">
-            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OgSA_lg0bjg/hqdefault.jpg');"></div><div class="folder-content"><h3>Recover Messages</h3><button class="view-btn" onclick="playMedia('youtube', 'OgSA_lg0bjg')">Watch</button></div></div>
-            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/sVKnEvCmKiY/hqdefault.jpg');"></div><div class="folder-content"><h3>Status Saver</h3><button class="view-btn" onclick="playMedia('youtube', 'sVKnEvCmKiY')">Watch</button></div></div>
-            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OEiwyITC5Kg/hqdefault.jpg');"></div><div class="folder-content"><h3>Time Management</h3><button class="view-btn" onclick="playMedia('youtube', 'OEiwyITC5Kg')">Watch</button></div></div>
-            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/rMQjvO2290k/hqdefault.jpg');"></div><div class="folder-content"><h3>App Install Fix</h3><button class="view-btn" onclick="playMedia('youtube', 'rMQjvO2290k')">Watch</button></div></div>
+            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OgSA_lg0bjg/hqdefault.jpg');"></div><div class="folder-content"><h3>Recover Messages</h3><button class="view-btn" onclick="playMedia('youtube', 'OgSA_lg0bjg', 'Recover Messages')">Watch</button></div></div>
+            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/sVKnEvCmKiY/hqdefault.jpg');"></div><div class="folder-content"><h3>Status Saver</h3><button class="view-btn" onclick="playMedia('youtube', 'sVKnEvCmKiY', 'Status Saver')">Watch</button></div></div>
+            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OEiwyITC5Kg/hqdefault.jpg');"></div><div class="folder-content"><h3>Time Management</h3><button class="view-btn" onclick="playMedia('youtube', 'OEiwyITC5Kg', 'Time Management')">Watch</button></div></div>
+            <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/rMQjvO2290k/hqdefault.jpg');"></div><div class="folder-content"><h3>App Install Fix</h3><button class="view-btn" onclick="playMedia('youtube', 'rMQjvO2290k', 'App Install Fix')">Watch</button></div></div>
         </div>
     </div>
 
@@ -475,7 +674,7 @@
             <div class="section-title">Collections</div>
             
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://media.themoviedb.org/t/p/w780/yfiJyg8QhlPXdhPFieKZqp1171v.jpg');"></div><div class="folder-content"><h3>SOORYA (2025)</h3><button class="view-btn" onclick="playMedia('vimeo', '1159452386')">Play Movie</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://media.themoviedb.org/t/p/w780/yfiJyg8QhlPXdhPFieKZqp1171v.jpg');"></div><div class="folder-content"><h3>SOORYA (2025)</h3><button class="view-btn" onclick="playMedia('vimeo', '1159452386', 'SOORYA (2025)')">Play Movie</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>DARSHANA UKUWELA</h3><button class="view-btn" onclick="openDarshana()">Open Folder</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://echem.lk/images/gallery/class/gallery-2.jpg');"></div><div class="folder-content"><h3>AMILA DASSANAYAKE</h3><button class="view-btn" onclick="openAmila()">Open Folder</button></div></div>
             </div>
@@ -487,7 +686,7 @@
                 <div class="folder-card" style="border: 1px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>📚 SUMMARY BOOKS</h3><button class="view-btn" onclick="openSummaryBooks()">Open Books</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ffcc00;"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>Theory Session</h3><button class="view-btn" onclick="openTheorySession()">Open Folder</button></div></div>
                 <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://i.ibb.co/hJbL1CyT/image.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යාව Session</h3><button class="view-btn" onclick="openDaraSession()">Open Folder</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/i-r4erXKQsM/hqdefault.jpg');"></div><div class="folder-content"><h3>කාර්යය, ශක්තිය, බලය</h3><button class="view-btn" onclick="playMedia('youtube', 'i-r4erXKQsM')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/i-r4erXKQsM/hqdefault.jpg');"></div><div class="folder-content"><h3>කාර්යය, ශක්තිය, බලය</h3><button class="view-btn" onclick="playMedia('youtube', 'i-r4erXKQsM', 'කාර්යය, ශක්තිය, බලය')">Watch</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ff6600;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ASvTInTQ6us/hqdefault.jpg');"></div><div class="folder-content"><h3>Paper Discussion</h3><button class="view-btn" onclick="openPaperDiscussion()">Open Folder</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="resetLibrary()">← BACK</button>
@@ -496,8 +695,8 @@
         <div id="paper-discussion-view" style="display:none">
             <div class="section-title">PAPER DISCUSSION</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ASvTInTQ6us/hqdefault.jpg');"></div><div class="folder-content"><h3>Paper Discussion Part 01</h3><button class="view-btn" onclick="playWithAlert('ASvTInTQ6us')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/d-5etySzFj8/hqdefault.jpg');"></div><div class="folder-content"><h3>Paper Discussion Part 02</h3><button class="view-btn" onclick="playWithAlert('d-5etySzFj8')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ASvTInTQ6us/hqdefault.jpg');"></div><div class="folder-content"><h3>Paper Discussion Part 01</h3><button class="view-btn" onclick="playWithAlert('ASvTInTQ6us', 'Paper Discussion Part 01')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/d-5etySzFj8/hqdefault.jpg');"></div><div class="folder-content"><h3>Paper Discussion Part 02</h3><button class="view-btn" onclick="playWithAlert('d-5etySzFj8', 'Paper Discussion Part 02')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
@@ -510,7 +709,7 @@
                 <div class="folder-card" style="border: 1px solid #ff3300;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/jQO6kRVmW2Y/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 INORGANIC CHEMISTRY</h3><button class="view-btn" onclick="openInorganic()">Open Folder</button></div></div>
                 <div class="folder-card" style="border: 1px solid #ffcc00;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 රසායනික ගණනය කිරීම්</h3><button class="view-btn" onclick="openAmilaCalculations()">Open Folder</button></div></div>
                 <div class="folder-card" style="border: 1px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 ව්‍යුහය හා බන්ධන</h3><button class="view-btn" onclick="openStructureBonding()">Open Folder</button></div></div>
-                <div class="folder-card" style="border: 1px solid #00ff88;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/B8uzyXU4C0k/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 shakthi vidhyawa</h3><button class="view-btn" onclick="playMedia('youtube', 'B8uzyXU4C0k')">Watch Now</button></div></div>
+                <div class="folder-card" style="border: 1px solid #00ff88;"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/B8uzyXU4C0k/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 shakthi vidhyawa</h3><button class="view-btn" onclick="playMedia('youtube', 'B8uzyXU4C0k', 'shakthi vidhyawa')">Watch Now</button></div></div>
                 <div class="folder-card" style="border: 1px solid var(--neon);"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>📁 චාලක රසායනය</h3><button class="view-btn" onclick="openOrganicChemistry()">Open Folder</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="resetLibrary()">← BACK</button>
@@ -519,8 +718,8 @@
         <div id="organic-chemistry-view" style="display:none">
             <div class="section-title">චාලක රසායනය</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/sxrPBaXDIxE/hqdefault.jpg');"></div><div class="folder-content"><h3>චාලක රසායනය ආරම්භය |Day 01 </h3><button class="view-btn" onclick="playMedia('youtube', 'sxrPBaXDIxE')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/raueZj_rlG4/hqdefault.jpg');"></div><div class="folder-content"><h3>චාලක රසායනය  |Day 02</h3><button class="view-btn" onclick="playMedia('youtube', 'raueZj_rlG4')">Watch Now</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/sxrPBaXDIxE/hqdefault.jpg');"></div><div class="folder-content"><h3>චාලක රසායනය ආරම්භය |Day 01 </h3><button class="view-btn" onclick="playMedia('youtube', 'sxrPBaXDIxE', 'චාලක රසායනය Day 01')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/raueZj_rlG4/hqdefault.jpg');"></div><div class="folder-content"><h3>චාලක රසායනය  |Day 02</h3><button class="view-btn" onclick="playMedia('youtube', 'raueZj_rlG4', 'චාලක රසායනය Day 02')">Watch Now</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
         </div>
@@ -528,7 +727,7 @@
         <div id="periodicity-view" style="display:none">
             <div class="section-title">ආවර්තීය විචලනය - ONE DAY SEMINAR</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1lkGGAtB3fU/hqdefault.jpg');"></div><div class="folder-content"><h3>Full Seminar Video</h3><button class="view-btn" onclick="playMedia('youtube', '1lkGGAtB3fU')">Watch Now</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1lkGGAtB3fU/hqdefault.jpg');"></div><div class="folder-content"><h3>Full Seminar Video</h3><button class="view-btn" onclick="playMedia('youtube', '1lkGGAtB3fU', 'ආවර්තීය විචලනය')">Watch Now</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
         </div>
@@ -536,19 +735,19 @@
         <div id="inorganic-view" style="display:none">
             <div class="section-title">අකාබනික රසායනය (INORGANIC)</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/jQO6kRVmW2Y/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - S ගොනුව Part 01</h3><button class="view-btn" onclick="playMedia('youtube', 'jQO6kRVmW2Y')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/aOrlVhRzkG8/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - S ගොනුව Part 02</h3><button class="view-btn" onclick="playMedia('youtube', 'aOrlVhRzkG8')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/r6zL6z3q3MM/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - 13-14 කාණ්ඩ</h3><button class="view-btn" onclick="playMedia('youtube', 'r6zL6z3q3MM')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/dmt8jZQ1wnA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 03 - 15 කාණ්ඩය</h3><button class="view-btn" onclick="playMedia('youtube', 'dmt8jZQ1wnA')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/M-OEdrqomuc/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - 16 කාණ්ඩය (1)</h3><button class="view-btn" onclick="playMedia('youtube', 'M-OEdrqomuc')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/KGgfpQ3_NcY/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - 16 කාණ්ඩය (2)</h3><button class="view-btn" onclick="playMedia('youtube', 'KGgfpQ3_NcY')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/dzm6SVktNiA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - 17,18 කාණ්ඩ</h3><button class="view-btn" onclick="playMedia('youtube', 'Ds0CStgHS3Q')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/YZz1--NiGdk/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - කාබනික විශ්ලේෂණය</h3><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/_EmyKquh7WY/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 08 - D ගොනුව SEMINAR</h3><button class="view-btn" onclick="playMedia('youtube', '_EmyKquh7WY')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ZmiXHH2Y6TY/hqdefault.jpg');"></div><div class="folder-content"><h3>13,14 Past Paper MCQ</h3><button class="view-btn" onclick="playMedia('youtube', 'ZmiXHH2Y6TY')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5l6WPBo12Zo/hqdefault.jpg');"></div><div class="folder-content"><h3>15 Past Paper MCQ 1</h3><button class="view-btn" onclick="playMedia('youtube', '5l6WPBo12Zo')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/A2hBHCjwlP4/hqdefault.jpg');"></div><div class="folder-content"><h3>15 Past Paper MCQ 2</h3><button class="view-btn" onclick="playMedia('youtube', 'A2hBHCjwlP4')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/zfm-CKc8llA/hqdefault.jpg');"></div><div class="folder-content"><h3>16 Past Paper MCQ</h3><button class="view-btn" onclick="playMedia('youtube', 'zfm-CKc8llA')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/jQO6kRVmW2Y/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - S ගොනුව Part 01</h3><button class="view-btn" onclick="playMedia('youtube', 'jQO6kRVmW2Y', 'Day 01 - S ගොනුව Part 01')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/aOrlVhRzkG8/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - S ගොනුව Part 02</h3><button class="view-btn" onclick="playMedia('youtube', 'aOrlVhRzkG8', 'Day 01 - S ගොනුව Part 02')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/r6zL6z3q3MM/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - 13-14 කාණ්ඩ</h3><button class="view-btn" onclick="playMedia('youtube', 'r6zL6z3q3MM', 'Day 02 - 13-14 කාණ්ඩ')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/dmt8jZQ1wnA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 03 - 15 කාණ්ඩය</h3><button class="view-btn" onclick="playMedia('youtube', 'dmt8jZQ1wnA', 'Day 03 - 15 කාණ්ඩය')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/M-OEdrqomuc/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - 16 කාණ්ඩය (1)</h3><button class="view-btn" onclick="playMedia('youtube', 'M-OEdrqomuc', 'Day 04 - 16 කාණ්ඩය (1)')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/KGgfpQ3_NcY/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - 16 කාණ්ඩය (2)</h3><button class="view-btn" onclick="playMedia('youtube', 'KGgfpQ3_NcY', 'Day 05 - 16 කාණ්ඩය (2)')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/dzm6SVktNiA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - 17,18 කාණ්ඩ</h3><button class="view-btn" onclick="playMedia('youtube', 'Ds0CStgHS3Q', 'Day 06 - 17,18 කාණ්ඩ')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/YZz1--NiGdk/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - කාබනික විශ්ලේෂණය</h3><button class="view-btn" onclick="playMedia('youtube', 'mwPtpBn4gSo', 'Day 07 - කාබනික විශ්ලේෂණය')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/_EmyKquh7WY/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 08 - D ගොනුව SEMINAR</h3><button class="view-btn" onclick="playMedia('youtube', '_EmyKquh7WY', 'Day 08 - D ගොනුව SEMINAR')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/ZmiXHH2Y6TY/hqdefault.jpg');"></div><div class="folder-content"><h3>13,14 Past Paper MCQ</h3><button class="view-btn" onclick="playMedia('youtube', 'ZmiXHH2Y6TY', '13,14 Past Paper MCQ')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5l6WPBo12Zo/hqdefault.jpg');"></div><div class="folder-content"><h3>15 Past Paper MCQ 1</h3><button class="view-btn" onclick="playMedia('youtube', '5l6WPBo12Zo', '15 Past Paper MCQ 1')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/A2hBHCjwlP4/hqdefault.jpg');"></div><div class="folder-content"><h3>15 Past Paper MCQ 2</h3><button class="view-btn" onclick="playMedia('youtube', 'A2hBHCjwlP4', '15 Past Paper MCQ 2')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/zfm-CKc8llA/hqdefault.jpg');"></div><div class="folder-content"><h3>16 Past Paper MCQ</h3><button class="view-btn" onclick="playMedia('youtube', 'zfm-CKc8llA', '16 Past Paper MCQ')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
         </div>
@@ -556,14 +755,14 @@
         <div id="bonding-view" style="display:none">
             <div class="section-title">ව්‍යුහය හා බන්ධන - SESSIONS</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - ලුවිස් ව්‍යුහ ඇඳීම</h3><button class="view-btn" onclick="playMedia('youtube', 'D6gyAfIJ1uA')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9WcBhOASpXM/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - සම්පූර්ණ ව්‍යුහ</h3><button class="view-btn" onclick="playMedia('youtube', '9WcBhOASpXM')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/eBbF4Dg2KuI/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 03 - ලුවිස් ව්‍යුහ දත්ත</h3><button class="view-btn" onclick="playMedia('youtube', 'eBbF4Dg2KuI')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5wAPXqmBx8A/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - අවකාශ ව්‍යාප්තිය හා අණුක භ්‍රමණයාවය</h3><button class="view-btn" onclick="playMedia('youtube', '5wAPXqmBx8A')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/g6BCwdR0B2w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - අණුවල අණුක භ්‍රමණයාව</h3><button class="view-btn" onclick="playMedia('youtube', 'g6BCwdR0B2w')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/GXWUnY3q30w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා I</h3><button class="view-btn" onclick="playMedia('youtube', 'GXWUnY3q30w')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/W6LTBrXe1t0/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා II</h3><button class="view-btn" onclick="playMedia('youtube', 'W6LTBrXe1t0')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cXwx-z1k6hw/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - බන්ධන දිග හා තාපාංක</h3><button class="view-btn" onclick="playMedia('youtube', 'cXwx-z1k6hw')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/D6gyAfIJ1uA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - ලුවිස් ව්‍යුහ ඇඳීම</h3><button class="view-btn" onclick="playMedia('youtube', 'D6gyAfIJ1uA', 'Day 01 - ලුවිස් ව්‍යුහ ඇඳීම')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9WcBhOASpXM/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - සම්පූර්ණ ව්‍යුහ</h3><button class="view-btn" onclick="playMedia('youtube', '9WcBhOASpXM', 'Day 02 - සම්පූර්ණ ව්‍යුහ')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/eBbF4Dg2KuI/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 03 - ලුවිස් ව්‍යුහ දත්ත</h3><button class="view-btn" onclick="playMedia('youtube', 'eBbF4Dg2KuI', 'Day 03 - ලුවිස් ව්‍යුහ දත්ත')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5wAPXqmBx8A/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 04 - අවකාශ ව්‍යාප්තිය</h3><button class="view-btn" onclick="playMedia('youtube', '5wAPXqmBx8A', 'Day 04 - අවකාශ ව්‍යාප්තිය')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/g6BCwdR0B2w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 05 - අණුක භ්‍රමණයාව</h3><button class="view-btn" onclick="playMedia('youtube', 'g6BCwdR0B2w', 'Day 05 - අණුක භ්‍රමණයාව')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/GXWUnY3q30w/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා I</h3><button class="view-btn" onclick="playMedia('youtube', 'GXWUnY3q30w', 'Day 06 - ද්විතීයික අන්තර් ක්‍රියා I')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/W6LTBrXe1t0/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 06 - ද්විතීයික අන්තර් ක්‍රියා II</h3><button class="view-btn" onclick="playMedia('youtube', 'W6LTBrXe1t0', 'Day 06 - ද්විතීයික අන්තර් ක්‍රියා II')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cXwx-z1k6hw/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 07 - බන්ධන දිග හා තාපාංක</h3><button class="view-btn" onclick="playMedia('youtube', 'cXwx-z1k6hw', 'Day 07 - බන්ධන දිග හා තාපාංක')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
         </div>
@@ -571,16 +770,16 @@
         <div id="amila-calculations-view" style="display:none">
             <div class="section-title">රසායනික ගණනය කිරීම් - SESSIONS</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය කිරීම් |මූලික සංකල්ප| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'lyHYcTfV_pI')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/zLMOpG4609s/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය Extra session | ස්ටොයිකියෝමිතිය| Day 01</h3><button class="view-btn" onclick="playMedia('youtube', 'zLMOpG4609s')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/7L0rUkC9IjY/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | සාන්ද්‍රණ හා තනුකකරණය | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', '7L0rUkC9IjY')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/VRE-D7cuITA/hqdefault.jpg');"></div><div class="folder-content"><h3>රසායනික ගණනය | ප්‍රතිශත සංයුතිය | Day 02</h3><button class="view-btn" onclick="playMedia('youtube', 'VRE-D7cuITA')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/S3URdw1MZF4/hqdefault.jpg');"></div><div class="folder-content"><h3>2026 Revision රසායනික ගණනය කිරීම් | Day 3</h3><button class="view-btn" onclick="playMedia('youtube', 'S3URdw1MZF4')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5A1wLJgM4xQ/hqdefault.jpg');"></div><div class="folder-content"><h3>Past Papers | Week 01</h3><button class="view-btn" onclick="playMedia('youtube', '5A1wLJgM4xQ')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/Swwr_vNYU5s/hqdefault.jpg');"></div><div class="folder-content"><h3>REDOX One Day Seminar </h3><button class="view-btn" onclick="playMedia('youtube', 'Swwr_vNYU5s')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cVOLxWiF6Rc/hqdefault.jpg');"></div><div class="folder-content"><h3>H2O2 ප්‍රතික්‍රියා තුලින් කිරීම</h3><button class="view-btn" onclick="playMedia('youtube', 'cVOLxWiF6Rc')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cLy7V5teBwU/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox Extra session | වැඩිදුර ගැටළු</h3><button class="view-btn" onclick="playMedia('youtube', 'cLy7V5teBwU')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9indLikG8gc/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox වැඩිදුර කරුණු සාකච්ඡාව </h3><button class="view-btn" onclick="playMedia('youtube', '9indLikG8gc')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lyHYcTfV_pI/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - මූලික සංකල්ප</h3><button class="view-btn" onclick="playMedia('youtube', 'lyHYcTfV_pI', 'Day 01 - මූලික සංකල්ප')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/zLMOpG4609s/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 01 - ස්ටොයිකියෝමිතිය</h3><button class="view-btn" onclick="playMedia('youtube', 'zLMOpG4609s', 'Day 01 - ස්ටොයිකියෝමිතිය')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/7L0rUkC9IjY/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - සාන්ද්‍රණ හා තනුකකරණය</h3><button class="view-btn" onclick="playMedia('youtube', '7L0rUkC9IjY', 'Day 02 - සාන්ද්‍රණ හා තනුකකරණය')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/VRE-D7cuITA/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 02 - ප්‍රතිශත සංයුතිය</h3><button class="view-btn" onclick="playMedia('youtube', 'VRE-D7cuITA', 'Day 02 - ප්‍රතිශත සංයුතිය')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/S3URdw1MZF4/hqdefault.jpg');"></div><div class="folder-content"><h3>Day 3 - 2026 Revision</h3><button class="view-btn" onclick="playMedia('youtube', 'S3URdw1MZF4', 'Day 3 - 2026 Revision')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/5A1wLJgM4xQ/hqdefault.jpg');"></div><div class="folder-content"><h3>Past Papers Week 01</h3><button class="view-btn" onclick="playMedia('youtube', '5A1wLJgM4xQ', 'Past Papers Week 01')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/Swwr_vNYU5s/hqdefault.jpg');"></div><div class="folder-content"><h3>REDOX One Day Seminar</h3><button class="view-btn" onclick="playMedia('youtube', 'Swwr_vNYU5s', 'REDOX One Day Seminar')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cVOLxWiF6Rc/hqdefault.jpg');"></div><div class="folder-content"><h3>H2O2 ප්‍රතික්‍රියා</h3><button class="view-btn" onclick="playMedia('youtube', 'cVOLxWiF6Rc', 'H2O2 ප්‍රතික්‍රියා')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/cLy7V5teBwU/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox Extra Session</h3><button class="view-btn" onclick="playMedia('youtube', 'cLy7V5teBwU', 'Redox Extra Session')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/9indLikG8gc/hqdefault.jpg');"></div><div class="folder-content"><h3>Redox වැඩිදුර කරුණු</h3><button class="view-btn" onclick="playMedia('youtube', '9indLikG8gc', 'Redox වැඩිදුර කරුණු')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openAmila()">← BACK</button>
         </div>
@@ -588,8 +787,8 @@
         <div id="theory-session-view" style="display:none">
             <div class="section-title">Theory Sessions - 2026.02.04</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ෂේත්‍ර Part 04 I</h3><button class="view-btn" onclick="playWithAlert('QqAEsQ_jDIo')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div><div class="folder-content"><h3>2026.02.24 විද්‍යුත් ක්ෂේත්‍ර Part 04 II </h3><button class="view-btn" onclick="playWithAlert('OvY3y_B_Rjw')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/QqAEsQ_jDIo/hqdefault.jpg');"></div><div class="folder-content"><h3>විද්‍යුත් ක්ෂේත්‍ර Part 04 I</h3><button class="view-btn" onclick="playWithAlert('QqAEsQ_jDIo', 'විද්‍යුත් ක්ෂේත්‍ර Part 04 I')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/OvY3y_B_Rjw/hqdefault.jpg');"></div><div class="folder-content"><h3>විද්‍යුත් ක්ෂේත්‍ර Part 04 II</h3><button class="view-btn" onclick="playWithAlert('OvY3y_B_Rjw', 'විද්‍යුත් ක්ෂේත්‍ර Part 04 II')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
@@ -610,57 +809,85 @@
         <div id="dara-session-view" style="display:none">
             <div class="section-title">ධාරා විද්‍යුත්වය - FULL SESSIONS</div>
             <div class="folder-grid">
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 01</h3><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 02</h3><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/0NiXrjA8gnA/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 03</h3><button class="view-btn" onclick="playMedia('youtube', '0NiXrjA8gnA')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lfkqvYR5r9w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 04</h3><button class="view-btn" onclick="playMedia('youtube', 'lfkqvYR5r9w')">Watch</button></div></div>
-                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1V_FZE1lw5w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 05</h3><button class="view-btn" onclick="playMedia('youtube', '1V_FZE1lw5w')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/MfEZ48Gd9hE/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 01</h3><button class="view-btn" onclick="playMedia('youtube', 'MfEZ48Gd9hE', 'ධාරා විද්‍යුත්වය DAY 01')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1nQuRba9Yqc/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 02</h3><button class="view-btn" onclick="playMedia('youtube', '1nQuRba9Yqc', 'ධාරා විද්‍යුත්වය DAY 02')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/0NiXrjA8gnA/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 03</h3><button class="view-btn" onclick="playMedia('youtube', '0NiXrjA8gnA', 'ධාරා විද්‍යුත්වය DAY 03')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/lfkqvYR5r9w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 04</h3><button class="view-btn" onclick="playMedia('youtube', 'lfkqvYR5r9w', 'ධාරා විද්‍යුත්වය DAY 04')">Watch</button></div></div>
+                <div class="folder-card"><div class="folder-thumb" style="background-image: url('https://img.youtube.com/vi/1V_FZE1lw5w/hqdefault.jpg');"></div><div class="folder-content"><h3>ධාරා විද්‍යුත්වය DAY 05</h3><button class="view-btn" onclick="playMedia('youtube', '1V_FZE1lw5w', 'ධාරා විද්‍යුත්වය DAY 05')">Watch</button></div></div>
             </div>
             <button class="view-btn" style="width:120px;" onclick="openDarshana()">← BACK</button>
         </div>
 
+        <!-- Enhanced Player View -->
         <div id="player-view" style="display:none">
             <div class="custom-player-wrapper" id="player-wrapper">
+                <!-- Video Title Overlay -->
+                <div class="video-title-overlay">
+                    <h3 id="video-title-text">Now Playing</h3>
+                </div>
+                
+                <!-- Loading Spinner -->
+                <div class="loading-spinner" id="loading-spinner"></div>
+                
                 <div class="video-container" id="video-container">
                     <div class="video-transform-wrapper" id="video-transform-wrapper"></div>
                 </div>
+                
+                <!-- Enhanced Big Play Button -->
                 <button class="big-play-btn" id="big-play-btn">
                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </button>
+                
+                <!-- Channel Watermark -->
+                <div class="channel-watermark" id="channel-watermark" style="display:none;">
+                    <img src="https://i.ibb.co/GQ65k7yC/cyber-dt-logo.png" alt="Channel" />
+                    <span>CYBER DT</span>
+                </div>
+                
+                <!-- Enhanced Custom Controls -->
                 <div class="custom-controls" id="custom-controls">
                     <div class="progress-container" id="progress-container">
                         <div class="buffered-bar" id="buffered-bar"></div>
                         <div class="progress-bar" id="progress-bar"></div>
                     </div>
+                    
+                    <div class="time-display">
+                        <span class="current-time" id="current-time">0:00</span>
+                        <span>/</span>
+                        <span class="duration" id="duration">0:00</span>
+                    </div>
+                    
                     <div class="controls-row">
                         <div class="controls-left">
-                            <button class="control-btn play-btn" id="play-pause-btn">
+                            <!-- Enhanced Play/Pause Button -->
+                            <button class="control-btn play-btn" id="play-pause-btn" title="Play/Pause (Space)">
                                 <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 <svg id="pause-icon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                             </button>
-                            <div class="time-display">
-                                <span class="current-time" id="current-time">0:00</span>
-                                <span>/</span>
-                                <span class="duration" id="duration">0:00</span>
-                            </div>
-                        </div>
-                        <div class="controls-right">
-                            <div class="toolbar-group">
-                                <span class="toolbar-label">Zoom</span>
-                                <button class="control-btn zoom-btn" id="zoom-out-btn" title="Zoom Out">−</button>
-                                <span class="zoom-level" id="zoom-level">1x</span>
-                                <button class="control-btn zoom-btn" id="zoom-in-btn" title="Zoom In">+</button>
-                            </div>
                             
+                            <!-- Volume Control -->
                             <div class="volume-control">
-                                <button class="control-btn" id="volume-btn">
+                                <button class="control-btn" id="volume-btn" title="Mute/Unmute (M)">
                                     <svg id="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
                                     <svg id="mute-icon" viewBox="0 0 24 24" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
                                 </button>
                                 <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
                             </div>
-                            <button class="control-btn speed-btn" id="speed-btn">1x</button>
+                        </div>
+                        
+                        <div class="controls-right">
+                            <!-- Zoom Controls - ENHANCED -->
+                            <div class="toolbar-group">
+                                <span class="toolbar-label">Zoom</span>
+                                <button class="control-btn zoom-btn" id="zoom-out-btn" title="Zoom Out (-)">−</button>
+                                <span class="zoom-level" id="zoom-level">1.0x</span>
+                                <button class="control-btn zoom-btn" id="zoom-in-btn" title="Zoom In (+)">+</button>
+                            </div>
                             
+                            <!-- Speed Control -->
+                            <button class="control-btn speed-btn" id="speed-btn" title="Playback Speed">1x</button>
+                            
+                            <!-- Quality Control - ENHANCED -->
                             <div class="quality-dropdown">
                                 <button class="control-btn quality-btn" id="quality-btn" title="Video Quality">HD</button>
                                 <div class="quality-menu" id="quality-menu">
@@ -672,7 +899,8 @@
                                 </div>
                             </div>
                             
-                            <button class="control-btn" id="fullscreen-btn">
+                            <!-- Fullscreen Button -->
+                            <button class="control-btn expand-btn" id="fullscreen-btn" title="Fullscreen (F)">
                                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
                             </button>
                         </div>
@@ -701,6 +929,7 @@
     let currentMode = "main";
     let currentVideoId = null;
     let currentVideoType = null;
+    let currentVideoTitle = '';
     let player = null;
     let isPlaying = false;
     let isMuted = false;
@@ -711,7 +940,7 @@
     let currentQuality = 'large';
     let userName = '';
     let autoHideControlsTimer = null;
-    const AUTO_HIDE_DELAY = 1000;
+    const AUTO_HIDE_DELAY = 3000; // 3 seconds
     
     // Zoom state
     let currentZoom = 1;
@@ -791,9 +1020,9 @@
     function updateLive() {
         const container = document.getElementById('live-container');
         if (LIVE_ID) {
-            container.innerHTML = `<div style="position:relative;padding-bottom:56.25%;background:#000;border-radius:15px;border:1px solid var(--neon);"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/${LIVE_ID}?autoplay=1" allowfullscreen></iframe></div>`;
+            container.innerHTML = `<div style="position:relative;padding-bottom:56.25%;background:#000;border-radius:15px;border:2px solid var(--neon);box-shadow:0 0 30px rgba(0, 242, 255, 0.3);"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/${LIVE_ID}?autoplay=1" allowfullscreen></iframe></div>`;
         } else {
-            container.innerHTML = `<div style="padding:40px; background:#0a0a12; border-radius:15px; color:#555;">NO LIVE STREAMING NOW</div>`;
+            container.innerHTML = `<div style="padding:40px; background:#0a0a12; border-radius:15px; color:#555; border: 1px solid var(--neon);">NO LIVE STREAMING NOW</div>`;
         }
     }
 
@@ -847,8 +1076,8 @@
         clearAutoHideTimer();
     }
 
-    function playMedia(type, id) {
-        console.log('playMedia called:', type, id);
+    function playMedia(type, id, title = 'Now Playing') {
+        console.log('playMedia called:', type, id, title);
         
         showPage('videos');
         hideAll();
@@ -856,19 +1085,34 @@
         
         currentVideoId = id;
         currentVideoType = type;
+        currentVideoTitle = title;
+        
+        // Update video title
+        document.getElementById('video-title-text').textContent = title;
         
         playerWrapper = document.getElementById('player-wrapper');
         
-        document.getElementById('big-play-btn').classList.add('hidden');
+        // Show loading spinner
+        document.getElementById('loading-spinner').classList.add('show');
         
         // Reset UI
+        document.getElementById('big-play-btn').classList.remove('hidden');
         updatePlayPauseIcon(false);
         document.getElementById('current-time').textContent = '0:00';
         document.getElementById('duration').textContent = '0:00';
         document.getElementById('progress-bar').style.width = '0%';
+        document.getElementById('buffered-bar').style.width = '0%';
         
         // Show custom controls
         document.getElementById('custom-controls').style.display = 'block';
+        
+        // Show channel watermark for YouTube
+        const watermark = document.getElementById('channel-watermark');
+        if (type === 'youtube') {
+            watermark.style.display = 'flex';
+        } else {
+            watermark.style.display = 'none';
+        }
         
         if (type === 'youtube') {
             initYouTubePlayer(id);
@@ -887,10 +1131,9 @@
     function setupAutoHideControls() {
         clearAutoHideTimer();
         showControlsOverlay();
-        startAutoHideTimer();
         
-        playerWrapper.addEventListener('touchstart', handleUserInteraction, { passive: true });
         playerWrapper.addEventListener('mousemove', handleUserInteraction);
+        playerWrapper.addEventListener('touchstart', handleUserInteraction, { passive: true });
         playerWrapper.addEventListener('click', handleUserInteraction);
     }
     
@@ -903,13 +1146,13 @@
     
     function showControlsOverlay() {
         if (playerWrapper) {
-            playerWrapper.classList.add('show-controls');
+            playerWrapper.classList.remove('hide-controls');
         }
     }
     
     function hideControlsOverlay() {
         if (playerWrapper && isPlaying) {
-            playerWrapper.classList.remove('show-controls');
+            playerWrapper.classList.add('hide-controls');
         }
     }
     
@@ -973,10 +1216,15 @@
     
     function onYouTubeReady(event) {
         console.log('YouTube Player Ready');
+        document.getElementById('loading-spinner').classList.remove('show');
         document.getElementById('duration').textContent = formatTime(player.getDuration());
         player.setVolume(currentVolume);
         player.setPlaybackRate(playbackSpeed);
         event.target.playVideo();
+        
+        // Update quality button to show current quality
+        const currentQ = player.getPlaybackQuality();
+        updateQualityDisplay(currentQ);
     }
     
     function onYouTubeStateChange(event) {
@@ -985,6 +1233,7 @@
             isPlaying = true;
             updatePlayPauseIcon(true);
             document.getElementById('big-play-btn').classList.add('hidden');
+            document.getElementById('loading-spinner').classList.remove('show');
             startProgressUpdate();
             startAutoHideTimer();
         } else if (event.data === YT.PlayerState.PAUSED) {
@@ -998,15 +1247,41 @@
             document.getElementById('big-play-btn').classList.remove('hidden');
             showControlsOverlay();
             clearAutoHideTimer();
+        } else if (event.data === YT.PlayerState.BUFFERING) {
+            document.getElementById('loading-spinner').classList.add('show');
         }
     }
     
     function onYouTubeError(event) {
         console.error('YouTube Error:', event.data);
+        document.getElementById('loading-spinner').classList.remove('show');
+        alert('Error loading video. Please try again.');
     }
     
     function onQualityChange(event) {
         console.log('Quality changed to:', event.data);
+        updateQualityDisplay(event.data);
+    }
+    
+    function updateQualityDisplay(quality) {
+        const qualityNames = {
+            'hd1080': '1080p',
+            'hd720': '720p',
+            'large': '480p',
+            'medium': '360p',
+            'small': '240p',
+            'tiny': '144p',
+            'auto': 'Auto'
+        };
+        document.getElementById('quality-btn').textContent = qualityNames[quality] || 'HD';
+        
+        // Update active state in menu
+        document.querySelectorAll('.quality-option').forEach(opt => {
+            opt.classList.remove('active');
+            if (opt.dataset.quality === quality) {
+                opt.classList.add('active');
+            }
+        });
     }
     
     function setQuality(quality) {
@@ -1015,21 +1290,7 @@
             player.setPlaybackQuality(quality);
         }
         
-        document.querySelectorAll('.quality-option').forEach(opt => {
-            opt.classList.remove('active');
-            if (opt.dataset.quality === quality) {
-                opt.classList.add('active');
-            }
-        });
-        
-        const qualityNames = {
-            'hd1080': '1080p',
-            'hd720': '720p',
-            'large': '480p',
-            'medium': '360p',
-            'small': '240p'
-        };
-        document.getElementById('quality-btn').textContent = qualityNames[quality] || 'HD';
+        updateQualityDisplay(quality);
         document.getElementById('quality-menu').classList.remove('show');
     }
 
@@ -1043,6 +1304,7 @@
         player = video;
         
         video.addEventListener('loadedmetadata', () => {
+            document.getElementById('loading-spinner').classList.remove('show');
             document.getElementById('duration').textContent = formatTime(video.duration);
         });
         
@@ -1076,6 +1338,14 @@
             }
         });
         
+        video.addEventListener('waiting', () => {
+            document.getElementById('loading-spinner').classList.add('show');
+        });
+        
+        video.addEventListener('canplay', () => {
+            document.getElementById('loading-spinner').classList.remove('show');
+        });
+        
         video.volume = currentVolume / 100;
         video.play();
     }
@@ -1087,6 +1357,7 @@
         
         document.getElementById('big-play-btn').classList.add('hidden');
         document.getElementById('custom-controls').style.display = 'none';
+        document.getElementById('loading-spinner').classList.remove('show');
         
         player = container.querySelector('iframe');
     }
@@ -1107,6 +1378,7 @@
         
         document.getElementById('fullscreen-btn').onclick = toggleFullscreen;
         
+        // Close quality menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.quality-dropdown')) {
                 document.getElementById('quality-menu').classList.remove('show');
@@ -1126,6 +1398,7 @@
         
         const container = document.getElementById('video-container');
         
+        // Pinch zoom for touch devices
         container.addEventListener('touchstart', (e) => {
             if (e.touches.length === 2) {
                 e.preventDefault();
@@ -1149,6 +1422,7 @@
             initialPinchDistance = 0;
         });
         
+        // Mouse wheel zoom
         container.addEventListener('wheel', (e) => {
             e.preventDefault();
             const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
@@ -1212,17 +1486,20 @@
         const update = () => {
             if (!player || !isPlaying) return;
             
-            const current = player.getCurrentTime();
-            const duration = player.getDuration();
-            const progress = (current / duration) * 100;
-            
-            document.getElementById('current-time').textContent = formatTime(current);
-            document.getElementById('progress-bar').style.width = progress + '%';
-            
-            if (player.getVideoBytesLoaded) {
-                const buffered = player.getVideoBytesLoaded() * 100;
-                document.getElementById('buffered-bar').style.width = buffered + '%';
-            }
+            try {
+                const current = player.getCurrentTime();
+                const duration = player.getDuration();
+                const progress = (current / duration) * 100;
+                
+                document.getElementById('current-time').textContent = formatTime(current);
+                document.getElementById('progress-bar').style.width = progress + '%';
+                
+                // Buffered progress
+                if (player.getVideoLoadedFraction) {
+                    const buffered = player.getVideoLoadedFraction() * 100;
+                    document.getElementById('buffered-bar').style.width = buffered + '%';
+                }
+            } catch(e) {}
             
             requestAnimationFrame(update);
         };
@@ -1316,15 +1593,15 @@
     });
     
     function formatTime(seconds) {
-        if (isNaN(seconds)) return '0:00';
+        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return mins + ':' + (secs < 10 ? '0' : '') + secs;
     }
 
-    function playWithAlert(id) {
+    function playWithAlert(id, title) {
         alert("⚠️ Technical network issue එකක් හේතුවෙන් මෙම වීඩියෝවේ විනාඩි 2ක පමණ කොටසක් අඩුවී ඇති බව කරුණාවෙන් සලකන්න.");
-        playMedia('youtube', id);
+        playMedia('youtube', id, title);
     }
 
     function backToFolder() {
@@ -1363,13 +1640,15 @@
                 togglePlayPause();
                 break;
             case 'ArrowLeft':
+                e.preventDefault();
                 if (currentVideoType === 'youtube') {
-                    player.seekTo(player.getCurrentTime() - 10, true);
+                    player.seekTo(Math.max(0, player.getCurrentTime() - 10), true);
                 } else if (currentVideoType === 'local') {
                     player.currentTime = Math.max(0, player.currentTime - 10);
                 }
                 break;
             case 'ArrowRight':
+                e.preventDefault();
                 if (currentVideoType === 'youtube') {
                     player.seekTo(player.getCurrentTime() + 10, true);
                 } else if (currentVideoType === 'local') {
@@ -1406,8 +1685,14 @@
             case '0':
                 resetZoom();
                 break;
+            case 'Escape':
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                }
+                break;
         }
     });
 </script>
 </body>
 </html>
+]]>
