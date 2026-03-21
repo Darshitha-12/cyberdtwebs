@@ -79,6 +79,22 @@
         cursor: pointer; transition: all 0.3s; 
     }
     .continue-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--neon); }
+    
+    /* Logout Button */
+    .logout-btn {
+        background: rgba(255, 50, 50, 0.2);
+        border: 1px solid rgba(255, 50, 50, 0.5);
+        color: #ff5050;
+        padding: 8px 16px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: all 0.3s;
+    }
+    .logout-btn:hover {
+        background: rgba(255, 50, 50, 0.4);
+    }
 
     #content-screen { display: none; padding-top: 100px; text-align: center; }
     .page-section { display: none; padding: 20px; max-width: 1200px; margin: 0 auto; animation: slideUp 0.6s ease; }
@@ -415,9 +431,10 @@
         font-size: 12px; 
         font-weight: bold; 
         min-width: 65px;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(0, 242, 255, 0.2);
         border-radius: 8px;
         padding: 8px 12px;
+        color: var(--neon);
     }
     
     /* Fullscreen Styles */
@@ -610,6 +627,7 @@
         </div>
         
         <button class="continue-btn" onclick="enterPortal()">🚀 Enter Portal</button>
+        <button class="logout-btn" onclick="logoutUser()">🔓 Logout / Switch Account</button>
     </div>
 </div>
 
@@ -875,7 +893,7 @@
                             <button class="control-btn speed-btn" id="speed-btn" title="Playback Speed">1x</button>
                             
                             <!-- Quality Badge (Auto HD) -->
-                            <span class="control-btn quality-btn" id="quality-btn" title="Auto HD Quality" style="cursor: default; font-size: 12px; font-weight: bold; min-width: 65px; background: rgba(0, 242, 255, 0.2); border-radius: 8px; padding: 8px 12px;">HD</span>
+                            <span class="control-btn quality-btn" id="quality-btn" title="Auto HD Quality">HD</span>
                             
                             <!-- Fullscreen Button -->
                             <button class="control-btn expand-btn" id="fullscreen-btn" title="Fullscreen (F)">
@@ -903,6 +921,10 @@
     const ACCESS_KEYS = ["CYBERDT2026", "Mother1", "Abhisheka1dt"];
     const LIVE_ID = ""; 
     
+    // ========== STORAGE KEYS ==========
+    const STORAGE_KEY_USER = 'cyberdt_user';
+    const STORAGE_KEY_LOGGED_IN = 'cyberdt_logged_in';
+    
     // ========== STATE VARIABLES ==========
     let currentMode = "main";
     let previousFolder = "main";
@@ -920,6 +942,11 @@
     let userName = '';
     let autoHideControlsTimer = null;
     const AUTO_HIDE_DELAY = 3000;
+    
+    // Quality enforcement
+    let qualityEnforcerInterval = null;
+    const QUALITY_ENFORCE_INTERVAL = 2000; // Check every 2 seconds
+    const TARGET_QUALITY = 'hd1080'; // Target highest quality
     
     // Zoom state
     let currentZoom = 1;
@@ -950,11 +977,39 @@
         ytApiReady = true;
     };
 
+    // ========== AUTO-LOGIN CHECK ON PAGE LOAD ==========
+    window.addEventListener('DOMContentLoaded', function() {
+        checkAutoLogin();
+    });
+    
+    function checkAutoLogin() {
+        const savedUser = localStorage.getItem(STORAGE_KEY_USER);
+        const isLoggedIn = localStorage.getItem(STORAGE_KEY_LOGGED_IN);
+        
+        if (savedUser && isLoggedIn === 'true') {
+            // Auto-login the user
+            userName = savedUser;
+            document.getElementById('login-screen').style.display = 'none';
+            loadYouTubeAPI();
+            
+            // Show welcome screen briefly then enter portal directly
+            showWelcomeScreen();
+            setTimeout(function() {
+                enterPortal();
+            }, 1500);
+        }
+    }
+
     // ========== LOGIN FUNCTIONS ==========
     function checkPassword() {
         const userInput = document.getElementById('passInput').value;
         userName = document.getElementById('regName').value || 'User';
+        
         if (ACCESS_KEYS.includes(userInput)) {
+            // Save login state to localStorage
+            localStorage.setItem(STORAGE_KEY_USER, userName);
+            localStorage.setItem(STORAGE_KEY_LOGGED_IN, 'true');
+            
             document.getElementById('login-screen').style.display = 'none';
             showWelcomeScreen();
             loadYouTubeAPI();
@@ -984,6 +1039,13 @@
         document.getElementById('watermark').style.display = 'block';
         startWatermark();
         updateLive();
+    }
+    
+    // ========== LOGOUT FUNCTION ==========
+    function logoutUser() {
+        localStorage.removeItem(STORAGE_KEY_USER);
+        localStorage.removeItem(STORAGE_KEY_LOGGED_IN);
+        location.reload();
     }
 
     // ========== NAVIGATION ==========
@@ -1111,6 +1173,10 @@
     // ========== PLAYER FUNCTIONS ==========
     function destroyPlayer() {
         console.log('destroyPlayer called');
+        
+        // Stop quality enforcer
+        stopQualityEnforcer();
+        
         if (player) {
             try {
                 if (currentVideoType === 'youtube' && player.destroy) {
@@ -1210,6 +1276,69 @@
         }, 100);
     }
     
+    // ========== QUALITY ENFORCEMENT SYSTEM ==========
+    function startQualityEnforcer() {
+        stopQualityEnforcer();
+        
+        // Immediately set quality
+        enforceHighestQuality();
+        
+        // Set interval to keep checking and enforcing
+        qualityEnforcerInterval = setInterval(enforceHighestQuality, QUALITY_ENFORCE_INTERVAL);
+        console.log('Quality enforcer started');
+    }
+    
+    function stopQualityEnforcer() {
+        if (qualityEnforcerInterval) {
+            clearInterval(qualityEnforcerInterval);
+            qualityEnforcerInterval = null;
+            console.log('Quality enforcer stopped');
+        }
+    }
+    
+    function enforceHighestQuality() {
+        if (!player || currentVideoType !== 'youtube') return;
+        
+        try {
+            const currentQ = player.getPlaybackQuality();
+            const availableQuality = player.getAvailableQualityLevels();
+            
+            console.log('Current quality:', currentQ, 'Available:', availableQuality);
+            
+            // Priority order for quality
+            const qualityPriority = ['hd1080', 'hd720', 'large', 'medium', 'small'];
+            
+            // Find the best available quality
+            let bestQuality = null;
+            for (let q of qualityPriority) {
+                if (availableQuality && availableQuality.includes(q)) {
+                    bestQuality = q;
+                    break;
+                }
+            }
+            
+            // Only change if we found a better quality
+            if (bestQuality && bestQuality !== currentQ) {
+                console.log('Setting quality to:', bestQuality);
+                player.setPlaybackQuality(bestQuality);
+                
+                // Also try setPlaybackQualityRange if available
+                if (player.setPlaybackQualityRange) {
+                    try {
+                        player.setPlaybackQualityRange(bestQuality, bestQuality);
+                        console.log('Set quality range to:', bestQuality);
+                    } catch(e) {
+                        console.log('setPlaybackQualityRange error:', e);
+                    }
+                }
+                
+                updateQualityDisplay(bestQuality);
+            }
+        } catch(e) {
+            console.log('Error enforcing quality:', e);
+        }
+    }
+
     // ========== AUTO-HIDE CONTROLS ==========
     function setupAutoHideControls() {
         clearAutoHideTimer();
@@ -1312,44 +1441,13 @@
         player.setVolume(currentVolume);
         player.setPlaybackRate(playbackSpeed);
         
-        setHighestQuality();
+        // Start quality enforcement
+        startQualityEnforcer();
         
-        const currentQ = player.getPlaybackQuality();
-        updateQualityDisplay(currentQ);
-    }
-    
-    function setHighestQuality() {
-        if (!player || currentVideoType !== 'youtube') return;
-        
-        const availableQuality = player.getAvailableQualityLevels();
-        console.log('Available qualities:', availableQuality);
-        
-        // Quality minimum 480p (large)
-        const qualityPriority = ['hd1080', 'hd720', 'large'];
-        
-        let bestQuality = 'auto';
-        if (availableQuality && availableQuality.length > 0) {
-            for (let q of qualityPriority) {
-                if (availableQuality.includes(q)) {
-                    bestQuality = q;
-                    break;
-                }
-            }
-        }
-        
-        if (bestQuality !== 'auto' && player.setPlaybackQuality) {
-            player.setPlaybackQuality(bestQuality);
-            console.log('Set quality to:', bestQuality);
-        }
-        
-        if (player.setPlaybackQualityRange) {
-            try {
-                player.setPlaybackQualityRange('hd1080', 'hd1080');
-                console.log('Set quality range to HD1080');
-            } catch(e) {
-                console.log('setPlaybackQualityRange not supported');
-            }
-        }
+        // Initial quality set
+        setTimeout(function() {
+            enforceHighestQuality();
+        }, 500);
     }
     
     function onYouTubeStateChange(event) {
@@ -1362,7 +1460,8 @@
             startProgressUpdate();
             startAutoHideTimer();
             
-            setHighestQuality();
+            // Re-enforce quality when playing
+            enforceHighestQuality();
         } else if (event.data === YT.PlayerState.PAUSED) {
             isPlaying = false;
             updatePlayPauseIcon(false);
@@ -1376,6 +1475,8 @@
             clearAutoHideTimer();
         } else if (event.data === YT.PlayerState.BUFFERING) {
             document.getElementById('loading-spinner').classList.add('show');
+            // Re-enforce quality when buffering
+            enforceHighestQuality();
         }
     }
     
@@ -1387,6 +1488,10 @@
     
     function onQualityChange(event) {
         console.log('Quality changed to:', event.data);
+        // Enforce quality again if it dropped
+        if (event.data !== 'hd1080' && event.data !== 'hd720') {
+            setTimeout(enforceHighestQuality, 100);
+        }
         updateQualityDisplay(event.data);
     }
     
@@ -1611,6 +1716,8 @@
         if (currentVideoType === 'youtube') {
             const duration = player.getDuration();
             player.seekTo(percent * duration, true);
+            // Re-enforce quality after seek
+            setTimeout(enforceHighestQuality, 200);
         } else if (currentVideoType === 'local') {
             player.currentTime = percent * player.duration;
         }
@@ -1741,6 +1848,7 @@
                 e.preventDefault();
                 if (currentVideoType === 'youtube') {
                     player.seekTo(Math.max(0, player.getCurrentTime() - 10), true);
+                    setTimeout(enforceHighestQuality, 200);
                 } else if (currentVideoType === 'local') {
                     player.currentTime = Math.max(0, player.currentTime - 10);
                 }
@@ -1749,6 +1857,7 @@
                 e.preventDefault();
                 if (currentVideoType === 'youtube') {
                     player.seekTo(player.getCurrentTime() + 10, true);
+                    setTimeout(enforceHighestQuality, 200);
                 } else if (currentVideoType === 'local') {
                     player.currentTime = Math.min(player.duration, player.currentTime + 10);
                 }
