@@ -919,7 +919,7 @@
 <script>
     // ========== CONFIGURATION ==========
     const ACCESS_KEYS = ["CYBERDT2026", "Mother1", "Abhisheka1dt"];
-    const LIVE_ID = "cXesesNavek"; 
+    const LIVE_ID = ""; 
     
     // ========== STORAGE KEYS ==========
     const STORAGE_KEY_USER = 'cyberdt_user';
@@ -980,6 +980,7 @@
     // ========== AUTO-LOGIN CHECK ON PAGE LOAD ==========
     window.addEventListener('DOMContentLoaded', function() {
         checkAutoLogin();
+        setupWelcomeScreenKeyboard();
     });
     
     function checkAutoLogin() {
@@ -987,17 +988,39 @@
         const isLoggedIn = localStorage.getItem(STORAGE_KEY_LOGGED_IN);
         
         if (savedUser && isLoggedIn === 'true') {
-            // Auto-login the user
+            // Auto-login the user - show welcome screen only, wait for user action
             userName = savedUser;
             document.getElementById('login-screen').style.display = 'none';
             loadYouTubeAPI();
-            
-            // Show welcome screen briefly then enter portal directly
             showWelcomeScreen();
-            setTimeout(function() {
-                enterPortal();
-            }, 1500);
+            // No automatic redirect - user must click button or press Enter
         }
+    }
+    
+    // ========== WELCOME SCREEN KEYBOARD LISTENER ==========
+    function setupWelcomeScreenKeyboard() {
+        document.addEventListener('keydown', function(e) {
+            // Check if welcome screen is visible
+            const welcomeScreen = document.getElementById('welcome-screen');
+            if (welcomeScreen.style.display === 'flex') {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    enterPortal();
+                }
+            }
+            
+            // Login screen Enter key for password input
+            const loginScreen = document.getElementById('login-screen');
+            if (loginScreen.style.display !== 'none') {
+                if (e.key === 'Enter') {
+                    const passInput = document.getElementById('passInput');
+                    if (document.activeElement === passInput) {
+                        e.preventDefault();
+                        checkPassword();
+                    }
+                }
+            }
+        });
     }
 
     // ========== LOGIN FUNCTIONS ==========
