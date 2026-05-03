@@ -1,0 +1,37 @@
+{
+  "name": "Study Tracker — A/L 2026",
+  "short_name": "StudyTracker",
+  "description": "2026 A/L Exam Study Tracker with live session tracking",
+  "start_url": "./tracker.html",
+  "display": "standalone",
+  "background_color": "#0b0f1a",
+  "theme_color": "#1D9E75",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Start Studying",
+      "url": "./tracker.html",
+      "description": "Open study tracker"
+    },
+    {
+      "name": "Public View",
+      "url": "./public.html",
+      "description": "See public study status"
+    }
+  ]
+}
